@@ -3,65 +3,209 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-		<div class="social-links">
-			<a href="https://github.com/Thomas3128/topo-montagne" target="_blank">
-				<span class="sr-only">Go to my GitHub repo</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
-			</a>
-		</div>
-	</nav>
+<header class="m-0 px-4 py-2 bg-transparent text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <nav class="flex flex-row items-center justify-between max-w-4xl mx-auto h-16 w-full">
+        <!-- 1. Titre du site -->
+        <div class="flex items-center shrink-0">
+            <h2 class="!text-xl font-bold m-0 leading-none">
+                <a href="/" class="no-underline text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400">
+                    {SITE_TITLE}
+                </a>
+            </h2>
+        </div>
+        
+        <!-- 2. Liens internes de navigation (Forcés en ligne) -->
+        <div class="internal-links flex flex-row items-center gap-4 mx-auto">
+            <HeaderLink href="/">Home</HeaderLink>
+            <HeaderLink href="/blog">Blog</HeaderLink>
+            <HeaderLink href="/about">About</HeaderLink>
+        </div>
+
+        <!-- 3. Section boutons (Bascule + GitHub forcés côte à côte) -->
+        <!-- Section boutons : Sécurité absolue via tableau HTML -->
+        <div class="shrink-0">
+            <table class="m-0 border-none bg-transparent p-0 table-auto" style="margin: 0 !important; border: none !important; background: transparent !important;">
+                <tr class="border-none bg-transparent" style="border: none !important; background: transparent !important;">
+
+					<!-- Case 2 : Le lien GitHub -->
+                    <td class="border-none p-0 align-middle bg-transparent social-links" style="border: none !important; padding: 0 !important; background: transparent !important;">
+                        <a href="https://github.com/Thomas3128/topo-montagne" target="_blank" class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors" style="display: block !important;">
+                            <span class="sr-only">Go to my GitHub repo</span>
+                            <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" style="display: block !important;">
+                                <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                            </svg>
+                        </a>
+                    </td>
+                    
+                    <!-- Case 1 : Le bouton Switch -->
+                    <td class="border-none p-0 pr-4 align-middle bg-transparent" style="border: none !important; padding: 0 16px 0 0 !important; background: transparent !important;">
+                        <button id="themeToggle" class="theme-switch" aria-label="Changer de thème" style="display: block !important; margin: 0 !important;">
+                            <div class="switch-track">
+                                <div class="switch-handle">
+                                    <!-- Icône Soleil -->
+                                    <svg class="icon sun" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M12 20v2"></path>
+                                        <path d="m4.93 4.93 1.41 1.41"></path>
+                                        <path d="m17.66 17.66 1.41 1.41"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="m6.34 17.66-1.41 1.41"></path>
+                                        <path d="m19.07 4.93-1.41 1.41"></path>
+                                    </svg>
+                                    
+                                    <!-- Icône Lune -->
+                                    <svg class="icon moon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+    header {
+        margin: 0;
+        padding: 0 1em;
+        /* On utilise une bordure subtile plutôt qu'une grosse ombre blanche */
+        border-bottom: 1px solid rgb(var(--gray-light));
+    }
+    h2 {
+        margin: 0;
+        font-size: 1.2em;
+    }
+    h2 a,
+    h2 a.active {
+        text-decoration: none;
+    }
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+	.flex-actions {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    /* Style de tes liens Home, Blog, About */
+    nav a {
+        padding: 1em 0.5em;
+        /* Utilise la variable adaptative qu'on a configurée dans global.css */
+        color: rgb(var(--gray-dark)); 
+        border-bottom: 4px solid transparent;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    nav a:hover {
+        color: var(--accent);
+    }
+    nav a.active {
+        text-decoration: none;
+        border-bottom-color: var(--accent);
+        color: rgb(var(--black));
+    }
+    .social-links,
+    .social-links a {
+        display: flex;
+        color: rgb(var(--gray-dark));
+        transition: color 0.2s ease;
+    }
+    .social-links a:hover {
+        color: var(--accent);
+    }
+    @media (max-width: 720px) {
+        .social-links {
+            display: none;
+        }
+    }
+/* Conteneur global de l'interrupteur */
+.theme-switch {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+/* La glissière (piste ovale) */
+.switch-track {
+    width: 54px;
+    height: 28px;
+    background-color: rgb(var(--gray-light));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 9999px;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* La pastille mobile qui glisse */
+.switch-handle {
+    width: 22px;
+    height: 22px;
+    background-color: #ffffff; /* Pastille blanche en mode clair */
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+/* Style de base des icônes SVG */
+.icon {
+    position: absolute;
+    transition: opacity 0.2s ease, transform 0.3s ease;
+    /* Indique au SVG de prendre la couleur définie par la propriété CSS "color" */
+    color: #0f1219; /* Icône noire par défaut */
+}
+
+/* Mode Clair : On affiche le soleil noir, on cache la lune */
+.icon.sun { opacity: 1; transform: scale(1); }
+.icon.moon { opacity: 0; transform: scale(0.6); }
+
+/* ==========================================================================
+   🔄 Mode Sombre (.dark sur le HTML)
+   ========================================================================== */
+
+:global(.dark) .switch-track {
+    background-color: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .switch-handle {
+    transform: translateX(26px);
+    background-color: #020617; /* Pastille noire en mode sombre */
+}
+
+/* Mode Sombre : On cache le soleil, on montre la lune blanche */
+:global(.dark) .icon {
+    color: #ffffff; /* L'icône devient blanche */
+}
+:global(.dark) .icon.sun { opacity: 0; transform: scale(0.6); }
+:global(.dark) .icon.moon { opacity: 1; transform: scale(1); }
 </style>
+
+<script>
+  // Ce script s'exécute côté navigateur (Client-side)
+  const toggle = document.getElementById('themeToggle');
+  
+  toggle?.addEventListener('click', () => {
+    const element = document.documentElement;
+    // On ajoute ou supprime la classe .dark
+    element.classList.toggle('dark');
+    
+    // On sauvegarde le choix pour les prochaines pages
+    const isDark = element.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
