@@ -5,12 +5,13 @@
  */
 
 :root {
-    --accent: #2337ff;
+    --accent: #0f1219;
     --accent-dark: #000d8a;
-    --black: 15, 18, 25;
-    --gray: 96, 115, 159;
-    --gray-light: 229, 233, 240;
-    --gray-dark: 34, 41, 57;
+	--black: 15, 18, 25;       			/* #0F1219 */
+    --gray: 96, 115, 159;      			/* #60739F */
+    --gray-light: 229, 233, 240; 		/* #E5E9F0 */
+    --gray-dark: 34, 41, 57;    		/* #222939 */
+
     --gray-gradient: rgba(var(--gray-light), 50%), #fff;
     --box-shadow:
         0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
@@ -18,15 +19,15 @@
 }
 /* 🌙 Thème Sombre (S'active quand <html class="dark">) */
 .dark {
-    --accent: #6366f1;
-    --accent-dark: #a5b4fc;
-    --black: 248, 250, 252;
-    --gray: 148, 163, 184;
-    --gray-light: 30, 41, 59;
-    --gray-dark: 203, 213, 225;
+    --accent: #d4a373;
+    --accent-dark: #bc6c25;
+    --black: 240, 242, 235;  			/* #F8FAFC */
+    --gray: 96, 108, 56;				/* #94A3B8 */
+    --gray-light: 40, 54, 24;			/* #1E293B */
+    --gray-dark: 233, 237, 201;			/* #CBD5E1 */
     
     /* Dégradé de fond sombre : du gris ardoise très foncé vers le noir de jais */
-    --gray-gradient: #0f172a, #020617; 
+    --gray-gradient: #1a2416, #120d0a; 
     
     --box-shadow:
         0 2px 6px rgba(0, 0, 0, 50%), 0 8px 24px rgba(0, 0, 0, 60%);
