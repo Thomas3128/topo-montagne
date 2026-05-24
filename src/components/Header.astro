@@ -3,6 +3,7 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
+
 <header class="m-0 px-4 py-2 bg-transparent text-slate-900 dark:text-slate-100 transition-colors duration-300">
     <nav class="flex flex-row items-center justify-between max-w-4xl mx-auto h-16 w-full">
         <!-- 1. Titre du site -->
@@ -16,9 +17,9 @@ import HeaderLink from './HeaderLink.astro';
         
         <!-- 2. Liens internes de navigation (desktop uniquement) -->
         <div class="internal-links flex flex-row items-center gap-4 mx-auto">
-            <HeaderLink href="/">Home</HeaderLink>
-            <HeaderLink href="/blog">Blog</HeaderLink>
-            <HeaderLink href="/about">About</HeaderLink>
+            <HeaderLink href="/">Accueil</HeaderLink>
+            <HeaderLink href="/topos">Topos</HeaderLink>
+            <HeaderLink href="/about">À propos</HeaderLink>
         </div>
 
         <!-- 3. Section boutons (desktop uniquement) -->
@@ -84,8 +85,8 @@ import HeaderLink from './HeaderLink.astro';
 <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
     <nav class="mobile-nav">
         <HeaderLink href="/">Home</HeaderLink>
-        <HeaderLink href="/blog">Blog</HeaderLink>
-        <HeaderLink href="/about">About</HeaderLink>
+        <HeaderLink href="/topos">Topos</HeaderLink>
+        <HeaderLink href="/about">À propos</HeaderLink>
     </nav>
 
     <div class="mobile-actions">
