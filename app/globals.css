@@ -21,10 +21,12 @@
   --gray-light: 233, 237, 201;
   --gray-dark: 88, 71, 47;
   --gray-gradient: #fefae0, #ffffff;
+  --warning: #d90303;
   --box-shadow:
     0 2px 6px rgba(107, 112, 92, 25%),
     0 8px 24px rgba(107, 112, 92, 33%),
     0 16px 32px rgba(107, 112, 92, 33%);
+    
 }
 
 .dark {
@@ -35,6 +37,7 @@
   --gray-light: 40, 54, 24;
   --gray-dark: 233, 237, 201;
   --gray-gradient: #1a2416, #120d0a;
+  --warning: #d90303;
   --box-shadow:
     0 2px 6px rgba(0, 0, 0, 50%),
     0 8px 24px rgba(0, 0, 0, 60%);
@@ -211,7 +214,26 @@ hr {
   color: rgb(var(--gray-dark));
 }
 
-/* Photo (gauche) + Carte (droite) — même hauteur */
+/* Grille externe : article (pleine largeur) + sidebar sticky à droite */
+.topo-outer-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+  max-width: 1750px;
+  margin: auto;
+  padding: 0 1em;
+  align-items: start;
+}
+
+.topo-sidebar {
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Photo + Carte côte à côte */
 .topo-media {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -234,7 +256,6 @@ hr {
 
 /* Encart stats + fiche technique */
 .topo-info-panel {
-  margin-top: 1.5rem;
   border: 1px solid rgb(var(--gray-light));
   border-radius: 12px;
   overflow: hidden;
@@ -290,7 +311,40 @@ hr {
 
 .topo-text { margin-top: 2rem; }
 
+.bra-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(188, 108, 37, 0.1);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.bra-link:hover { background: rgba(188, 108, 37, 0.2); color: var(--accent); }
+
+.recit-link {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(var(--gray-light));
+  text-align: right;
+}
+.recit-link a {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.recit-link a:hover { opacity: 0.75; }
+
 @media (max-width: 900px) {
+  .topo-outer-layout { grid-template-columns: 1fr; }
+  .topo-sidebar { position: static; }
   .topo-media { grid-template-columns: 1fr; }
   .topo-photo { height: 320px; }
   .topo-map { height: 320px; }

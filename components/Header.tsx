@@ -81,6 +81,7 @@ export default function Header() {
           <div className={styles.internalLinks}>
             <NavLink href="/">Accueil</NavLink>
             <NavLink href="/topos">Topos</NavLink>
+            <NavLink href="/recits">Récits</NavLink>
             <NavLink href="/about">À propos</NavLink>
           </div>
 
@@ -109,6 +110,7 @@ export default function Header() {
         <nav className={styles.mobileNav}>
           <NavLink href="/">Accueil</NavLink>
           <NavLink href="/topos">Topos</NavLink>
+          <NavLink href="/recits">Récits</NavLink>
           <NavLink href="/about">À propos</NavLink>
         </nav>
         <div className={styles.mobileActions}>

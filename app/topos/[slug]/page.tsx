@@ -34,51 +34,71 @@ export default async function TopoPage({ params }: Props) {
 
   return (
     <main className="content-main">
-      <article className="prose-wrapper">
+      <div className="topo-outer-layout">
 
-        {/* Titre + date */}
-        <div className="post-title">
-          <div className="post-date">
-            <FormattedDate date={frontmatter.pubDate} />
-            {frontmatter.updatedDate && (
-              <div className="last-updated-on">
-                Mis à jour le <FormattedDate date={frontmatter.updatedDate} />
-              </div>
-            )}
+        {/* Contenu principal */}
+        <article className="prose-wrapper">
+
+          <div className="post-title">
+            <div className="post-date">
+              <FormattedDate date={frontmatter.pubDate} />
+              {frontmatter.updatedDate && (
+                <div className="last-updated-on">
+                  Mis à jour le <FormattedDate date={frontmatter.updatedDate} />
+                </div>
+              )}
+            </div>
+            <h1>{frontmatter.title}</h1>
+            <hr />
           </div>
-          <h1>{frontmatter.title}</h1>
-          <hr />
-        </div>
 
-        {/* Photo (gauche) + Carte (droite) — même hauteur */}
-        {(frontmatter.heroImage || frontmatter.gpxPath) && (
-          <div className="topo-media">
-            {frontmatter.heroImage && (
-              <div className="topo-photo">
-                <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-              </div>
-            )}
-            {frontmatter.gpxPath && (
-              <div className="topo-map">
-                <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
-              </div>
-            )}
+          {(frontmatter.heroImage || frontmatter.gpxPath) && (
+            <div className="topo-media">
+              {frontmatter.heroImage && (
+                <div className="topo-photo">
+                  <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+                </div>
+              )}
+              {frontmatter.gpxPath && (
+                <div className="topo-map">
+                  <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="topo-text">
+            <MDXRemote source={content} />
           </div>
-        )}
 
-        {/* Encart pleine largeur : stats GPX + profil alti + fiche technique */}
-        <TopoInfoPanel
-          gpxPath={frontmatter.gpxPath}
-          gpxColor={frontmatter.gpxColor}
-          ficheTechnique={frontmatter.ficheTechnique}
-        />
+          {frontmatter.recitSlug && (
+            <div className="recit-link">
+              <a href={`/recits/${frontmatter.recitSlug}`}>Lire le récit →</a>
+            </div>
+          )}
 
-        {/* Texte de l'article */}
-        <div className="topo-text">
-          <MDXRemote source={content} />
-        </div>
+        </article>
 
-      </article>
+        {/* Sidebar sticky : BRA + profil + fiche */}
+        <aside className="topo-sidebar">
+          {frontmatter.braUrl && (
+            <a
+              href={frontmatter.braUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bra-link"
+            >
+              ❄️ Consulter le BRA
+            </a>
+          )}
+          <TopoInfoPanel
+            gpxPath={frontmatter.gpxPath}
+            gpxColor={frontmatter.gpxColor}
+            ficheTechnique={frontmatter.ficheTechnique}
+          />
+        </aside>
+
+      </div>
     </main>
   );
 }

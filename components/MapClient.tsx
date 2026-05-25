@@ -18,6 +18,13 @@ export default function MapClient({ gpxPath, color = '#ff0000' }: Props) {
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
 
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconUrl: '/leaflet-icons/marker-icon.png',
+      iconRetinaUrl: '/leaflet-icons/marker-icon-2x.png',
+      shadowUrl: '/leaflet-icons/marker-shadow.png',
+    });
+
     const map = L.map(mapContainerRef.current);
     mapRef.current = map;
 

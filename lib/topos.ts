@@ -18,6 +18,8 @@ export interface TopoFrontmatter {
   gpxPath?: string;
   gpxColor?: string;
   ficheTechnique?: FicheRow[];
+  recitSlug?: string;
+  braUrl?: string;
 }
 
 export interface Topo {

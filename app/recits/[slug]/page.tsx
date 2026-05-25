@@ -1,0 +1,67 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { getAllRecits, getRecitBySlug } from '@/lib/recits';
+import { getTopoBySlug } from '@/lib/topos';
+import FormattedDate from '@/components/FormattedDate';
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return getAllRecits().map((r) => ({ slug: r.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const recit = getRecitBySlug(slug);
+  if (!recit) return {};
+  return {
+    title: `${recit.frontmatter.title} — La montagne vue par Dijs`,
+  };
+}
+
+export default async function RecitPage({ params }: Props) {
+  const { slug } = await params;
+  const recit = getRecitBySlug(slug);
+  if (!recit) notFound();
+
+  const { frontmatter, content } = recit;
+  const topo = frontmatter.topoSlug ? getTopoBySlug(frontmatter.topoSlug) : null;
+
+  return (
+    <main className="content-main">
+      <article className="prose-wrapper">
+
+        <div className="post-title">
+          <div className="post-date">
+            <FormattedDate date={frontmatter.pubDate} />
+          </div>
+          <h1>{frontmatter.title}</h1>
+          {topo && (
+            <p style={{ marginTop: '0.5rem', fontSize: '0.95rem' }}>
+              <Link href={`/topos/${frontmatter.topoSlug}`} style={{ color: 'var(--accent)' }}>
+                ← Voir le topo : {topo.frontmatter.title}
+              </Link>
+            </p>
+          )}
+          <hr />
+        </div>
+
+        {frontmatter.heroImage && (
+          <div className="topo-photo" style={{ marginBottom: '2rem' }}>
+            <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+          </div>
+        )}
+
+        <div className="topo-text">
+          <MDXRemote source={content} />
+        </div>
+
+      </article>
+    </main>
+  );
+}

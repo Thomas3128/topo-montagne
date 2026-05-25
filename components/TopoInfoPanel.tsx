@@ -75,8 +75,8 @@ function ElevationChart({ elevData, color }: { elevData: [number, number][]; col
     const div = chartRef.current;
     if (!div || elevData.length < 2) return;
 
-    const W = div.clientWidth || 800;
-    const H = 120;
+    const W = div.clientWidth || 300;
+    const H = 160;
     const m = { top: 10, right: 16, bottom: 24, left: 44 };
     const iW = W - m.left - m.right;
     const iH = H - m.top - m.bottom;
@@ -116,7 +116,7 @@ function ElevationChart({ elevData, color }: { elevData: [number, number][]; col
     const midY = (m.top + iH / 2).toFixed(1);
 
     div.innerHTML =
-      `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">` +
+      `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">` +
       `<defs><linearGradient id="${gId}" x1="0" y1="0" x2="0" y2="1">` +
       `<stop offset="0%" stop-color="${color}" stop-opacity="0.35"/>` +
       `<stop offset="100%" stop-color="${color}" stop-opacity="0.05"/>` +
@@ -131,7 +131,7 @@ function ElevationChart({ elevData, color }: { elevData: [number, number][]; col
       '</svg>';
   }, [elevData, color]);
 
-  return <div ref={chartRef} style={{ height: '120px', width: '100%', background: '#fff' }} />;
+  return <div ref={chartRef} style={{ height: '160px', width: '100%' }} />;
 }
 
 export default function TopoInfoPanel({ gpxPath, gpxColor = '#bc6c25', ficheTechnique }: Props) {
