@@ -326,6 +326,36 @@ hr {
 }
 .bra-link:hover { background: rgba(188, 108, 37, 0.2); color: var(--accent); }
 
+.download-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.dl-btn {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  border: 1px solid var(--accent);
+}
+.dl-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.dl-btn-pdf {
+  background: var(--accent);
+  color: #fff;
+}
+.dl-btn-pdf:hover:not(:disabled) { opacity: 0.85; }
+.dl-btn-gpx {
+  background: transparent;
+  color: var(--accent);
+}
+.dl-btn-gpx:hover { background: rgba(188, 108, 37, 0.1); }
+
 .recit-link {
   margin-top: 2rem;
   padding-top: 1.5rem;

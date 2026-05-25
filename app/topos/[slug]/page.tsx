@@ -6,6 +6,7 @@ import { getAllTopos, getTopoBySlug } from '@/lib/topos';
 import FormattedDate from '@/components/FormattedDate';
 import Map from '@/components/Map';
 import TopoInfoPanel from '@/components/TopoInfoPanel';
+import DownloadButtons from '@/components/DownloadButtons';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -95,6 +96,14 @@ export default async function TopoPage({ params }: Props) {
             gpxPath={frontmatter.gpxPath}
             gpxColor={frontmatter.gpxColor}
             ficheTechnique={frontmatter.ficheTechnique}
+          />
+          <DownloadButtons
+            gpxPath={frontmatter.gpxPath}
+            braUrl={frontmatter.braUrl}
+            topoTitle={frontmatter.title}
+            topoContent={content}
+            ficheTechnique={frontmatter.ficheTechnique}
+            gpxColor={frontmatter.gpxColor}
           />
         </aside>
 
