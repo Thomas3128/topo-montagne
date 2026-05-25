@@ -4,12 +4,20 @@ import matter from 'gray-matter';
 
 const TOPOS_DIR = path.join(process.cwd(), 'content/topos');
 
+export interface FicheRow {
+  label: string;
+  value: string;
+}
+
 export interface TopoFrontmatter {
   title: string;
   description: string;
   pubDate: string;
   updatedDate?: string;
   heroImage?: string;
+  gpxPath?: string;
+  gpxColor?: string;
+  ficheTechnique?: FicheRow[];
 }
 
 export interface Topo {

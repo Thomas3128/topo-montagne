@@ -204,11 +204,97 @@ hr {
 /* ── Topo detail / About pages ─────────────────── */
 .content-main { width: calc(100% - 2em); max-width: 100%; margin: 0; padding: 0; }
 .prose-wrapper {
-  width: 1200px;
+  width: 1400px;
   max-width: calc(100% - 2em);
   margin: auto;
   padding: 1em;
   color: rgb(var(--gray-dark));
+}
+
+/* Photo (gauche) + Carte (droite) — même hauteur */
+.topo-media {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 0;
+  align-items: start;
+}
+
+.topo-photo {
+  position: relative;
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.topo-map {
+  height: 600px;
+  border-radius: 12px;
+}
+
+/* Encart stats + fiche technique */
+.topo-info-panel {
+  margin-top: 1.5rem;
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(233, 237, 201, 0.08);
+}
+
+.topo-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(233, 237, 201, 0.2);
+  border-bottom: 1px solid rgb(var(--gray-light));
+  padding: 1rem 0;
+}
+
+.topo-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid rgb(var(--gray-light));
+}
+.topo-stat:last-child { border-right: none; }
+
+.topo-stat-label { font-size: 0.75rem; color: rgb(var(--gray)); text-transform: uppercase; font-weight: 600; }
+.topo-stat-value { font-size: 1.3rem; font-weight: bold; color: rgb(var(--black)); }
+
+.topo-elevation {
+  border-bottom: 1px solid rgb(var(--gray-light));
+}
+
+.topo-fiche {
+  padding: 1.25rem 1.5rem;
+}
+
+.topo-fiche-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.topo-fiche-table th,
+.topo-fiche-table td {
+  padding: 0.45rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgb(var(--gray-light));
+}
+.topo-fiche-table tr:last-child th,
+.topo-fiche-table tr:last-child td { border-bottom: none; }
+.topo-fiche-table th {
+  width: 40%;
+  font-weight: 600;
+  color: rgb(var(--gray-dark));
+}
+.topo-fiche-table td { color: rgb(var(--gray-dark)); }
+
+.topo-text { margin-top: 2rem; }
+
+@media (max-width: 900px) {
+  .topo-media { grid-template-columns: 1fr; }
+  .topo-photo { height: 320px; }
+  .topo-map { height: 320px; }
+  .topo-map > div { height: 320px !important; }
 }
 .post-title {
   margin-bottom: 1em;
