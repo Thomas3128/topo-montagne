@@ -25,19 +25,19 @@ export default function Home() {
       <hr />
 
       <section className="home-grid">
-        <div className="card">
+        <a href="/topos" className="card">
           <h3>Derniers Topos</h3>
           <p>Découvrez les derniers topos recensés…</p>
-          <a href="/topos" className="btn-link">Explorer les topos →</a>
-        </div>
-        <div className="card">
+          <span className="btn-link">Explorer les topos →</span>
+        </a>
+        <a href="/about" className="card">
           <h3>À propos</h3>
           <p>
             Pourquoi ce site ? Qui se cache derrière le sac à dos ? Découvrez ma philosophie de
             randonnée.
           </p>
-          <a href="/about" className="btn-link">En savoir plus →</a>
-        </div>
+          <span className="btn-link">En savoir plus →</span>
+        </a>
       </section>
 
       <section className="quote-box">
