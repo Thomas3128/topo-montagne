@@ -1,38 +1,78 @@
-## 🚀 Project Structure
+# La montagne vue par Dijs
 
-Inside the project, you'll see the following folders and files:
+Site personnel de topos d'alpinisme et de randonnée en montagne, avec les récits qui vont avec.
+Construit pour avoir un endroit à moi pour partager les courses, les itinéraires, et les bons souvenirs — sans dépendre d'une plateforme tierce.
 
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+## Stack
+
+- **Next.js 15** (App Router) — migré depuis Astro pour pouvoir ajouter du backend par la suite
+- **MDX** — les topos et récits sont écrits en Markdown avec du JSX pour les éléments interactifs
+- **Leaflet + leaflet-gpx** — cartes interactives avec affichage du tracé GPX
+- **jsPDF** — export PDF du topo avec mise en forme (titres, gras, liens, stats GPX)
+- **TypeScript**
+
+## Structure
+
+```
+content/
+  topos/          # Topos techniques (itinéraire, fiche, infos pratiques)
+  recits/         # Récits de courses (narration, ambiance)
+
+app/
+  topos/[slug]/   # Page d'un topo
+  recits/[slug]/  # Page d'un récit
+
+components/
+  MapClient.tsx       # Carte Leaflet (client-side)
+  TopoInfoPanel.tsx   # Stats GPX + profil altimétrique + fiche technique
+  DownloadButtons.tsx # Export PDF et téléchargement GPX
+
+public/
+  gpx/            # Fichiers GPX des courses
+  images/         # Photos
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Ajouter un topo
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Créer `content/topos/mon-topo.mdx` avec le frontmatter :
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+```yaml
+---
+title: "Nom de la course"
+description: "Courte description"
+pubDate: 'May 26 2026'
+heroImage: '/images/ma-photo.jpg'
+gpxPath: '/gpx/ma-course.gpx'
+recitSlug: 'mon-recit'          # optionnel — pointe vers content/recits/
+braUrl: 'https://...'           # optionnel — lien vers le BRA Météo France
+ficheTechnique:
+  - label: "Sommet"
+    value: "Nom du sommet"
+  - label: "Altitude max"
+    value: "3 000 m"
+---
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+Puis écrire le contenu en Markdown sous le frontmatter.
 
-## 🧞 Commands
+## Ajouter un récit
 
-All commands are run from the root of the project, from a terminal:
+Créer `content/recits/mon-recit.mdx` :
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```yaml
+---
+title: "Titre du récit"
+topoSlug: "mon-topo"   # lien retour vers le topo
+pubDate: 'May 26 2026'
+heroImage: '/images/ma-photo.jpg'
+---
+```
+
+## Commandes
+
+```bash
+npm install       # installer les dépendances
+npm run dev       # lancer le serveur local → localhost:3000
+npm run build     # build de production
+npm run start     # démarrer le build en local
+```
