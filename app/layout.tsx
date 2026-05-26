@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'La montagne vue par Dijs',
   description: 'Topos et récits de montagne — randonnée, alpinisme, ski de rando.',
-  icons: { icon: [{ url: '/favicon.svg' }, { url: '/favicon.ico' }] },
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
