@@ -32,18 +32,24 @@ export default function MapClient({ gpxPath, color = '#ff0000' }: Props) {
       attribution: '© OpenTopoMap',
     }).addTo(map);
 
+    let timer: ReturnType<typeof setTimeout>;
+
     new L.GPX(gpxPath, {
       async: true,
       polyline_options: { color, opacity: 0.8, weight: 5, lineCap: 'round' },
       marker_options: { startIconUrl: null, endIconUrl: null },
     })
       .on('loaded', (e) => {
-        map.fitBounds(e.target.getBounds());
-        setTimeout(() => map.invalidateSize(), 200);
+        timer = setTimeout(() => {
+          if (mapRef.current !== map) return;
+          map.invalidateSize();
+          map.fitBounds(e.target.getBounds());
+        }, 200);
       })
       .addTo(map);
 
     return () => {
+      clearTimeout(timer);
       map.remove();
       mapRef.current = null;
     };
