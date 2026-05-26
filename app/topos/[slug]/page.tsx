@@ -7,6 +7,7 @@ import FormattedDate from '@/components/FormattedDate';
 import Map from '@/components/Map';
 import TopoInfoPanel from '@/components/TopoInfoPanel';
 import DownloadButtons from '@/components/DownloadButtons';
+import TransportRoute from '@/components/TransportRoute';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -35,7 +36,14 @@ export default async function TopoPage({ params }: Props) {
 
   return (
     <main className="content-main">
-      <div className="topo-outer-layout">
+      <div className={`topo-outer-layout${frontmatter.transport?.length ? ' topo-outer-layout--transport' : ''}`}>
+
+        {/* Sidebar gauche : transports en commun */}
+        {frontmatter.transport?.length && (
+          <aside className="topo-sidebar">
+            <TransportRoute stops={frontmatter.transport} />
+          </aside>
+        )}
 
         {/* Contenu principal */}
         <article className="prose-wrapper">
