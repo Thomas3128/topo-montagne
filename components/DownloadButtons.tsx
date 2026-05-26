@@ -10,6 +10,7 @@ interface Props {
   topoTitle: string;
   topoContent: string;
   ficheTechnique?: FicheRow[];
+  gpxColor?: string;
 }
 
 // ── Inline segments ──────────────────────────────────────────────────────────

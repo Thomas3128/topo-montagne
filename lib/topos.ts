@@ -9,6 +9,14 @@ export interface FicheRow {
   value: string;
 }
 
+export interface TransportStop {
+  stop: string;
+  via?: string;
+  ligne?: string;
+  duree?: string;
+  lien?: string;
+}
+
 export interface TopoFrontmatter {
   title: string;
   description: string;
@@ -18,6 +26,7 @@ export interface TopoFrontmatter {
   gpxPath?: string;
   gpxColor?: string;
   ficheTechnique?: FicheRow[];
+  transport?: TransportStop[];
   recitSlug?: string;
   braUrl?: string;
 }
