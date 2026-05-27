@@ -82,6 +82,7 @@ export default function Header() {
             <NavLink href="/">Accueil</NavLink>
             <NavLink href="/topos">Topos</NavLink>
             <NavLink href="/recits">Récits</NavLink>
+            <NavLink href="/materiel">Matériel</NavLink>
             <NavLink href="/aide">Aide</NavLink>
             <NavLink href="/about">À propos</NavLink>
           </div>
@@ -112,6 +113,7 @@ export default function Header() {
           <NavLink href="/">Accueil</NavLink>
           <NavLink href="/topos">Topos</NavLink>
           <NavLink href="/recits">Récits</NavLink>
+          <NavLink href="/materiel">Matériel</NavLink>
           <NavLink href="/aide">Aide</NavLink>
           <NavLink href="/about">À propos</NavLink>
         </nav>
