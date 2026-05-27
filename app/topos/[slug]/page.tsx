@@ -8,6 +8,7 @@ import Map from '@/components/Map';
 import TopoInfoPanel from '@/components/TopoInfoPanel';
 import DownloadButtons from '@/components/DownloadButtons';
 import TransportRoute from '@/components/TransportRoute';
+import RouteRecap from '@/components/RouteRecap';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -36,22 +37,13 @@ export default async function TopoPage({ params }: Props) {
 
   return (
     <main className="content-main">
-      <div className={`topo-outer-layout${frontmatter.transport?.length ? ' topo-outer-layout--transport' : ''}`}>
+      <div className={`topo-outer-layout${(frontmatter.transport?.length || frontmatter.route?.length) ? ' topo-outer-layout--transport' : ''}`}>
 
-        {/* Sidebar gauche : transports en commun */}
-        {frontmatter.transport?.length && (
+        {/* Sidebar gauche : transports + itinéraire */}
+        {(frontmatter.transport?.length || frontmatter.route?.length) && (
           <aside className="topo-sidebar">
-            {frontmatter.braUrl && (
-            <a
-              href={frontmatter.braUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bra-link"
-            >
-              Consulter le BRA (Avalanches)
-            </a>
-          )}
-            <TransportRoute stops={frontmatter.transport} />
+            {frontmatter.transport?.length && <TransportRoute stops={frontmatter.transport} />}
+            {frontmatter.route?.length && <RouteRecap stops={frontmatter.route} />}
           </aside>
         )}
 
@@ -100,6 +92,11 @@ export default async function TopoPage({ params }: Props) {
 
         {/* Sidebar sticky : BRA + profil + fiche */}
         <aside className="topo-sidebar">
+          {frontmatter.braUrl && (
+              <a href={frontmatter.braUrl} target="_blank" rel="noopener noreferrer" className="bra-link">
+                Consulter le BRA (Avalanches)
+              </a>
+            )}
           <TopoInfoPanel
             gpxPath={frontmatter.gpxPath}
             gpxColor={frontmatter.gpxColor}

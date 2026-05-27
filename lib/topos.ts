@@ -17,6 +17,16 @@ export interface TransportStop {
   lien?: string;
 }
 
+export interface RouteStop {
+  stop: string;
+  jour?: number;
+  dp?: number | string;
+  dm?: number | string;
+  km?: number | string;
+  diffTech?: string;
+  diffPhys?: string;
+}
+
 export interface TopoFrontmatter {
   title: string;
   description: string;
@@ -27,6 +37,7 @@ export interface TopoFrontmatter {
   gpxColor?: string;
   ficheTechnique?: FicheRow[];
   transport?: TransportStop[];
+  route?: RouteStop[];
   recitSlug?: string;
   braUrl?: string;
 }

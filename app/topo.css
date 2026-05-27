@@ -179,6 +179,34 @@
 }
 .transport-leg-link:hover { color: var(--accent-dark); }
 
+/* ── Route recap ──────────────────────────────────── */
+.route-day-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 0 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.route-diff {
+  background: rgba(var(--gray-light), 0.8);
+  color: rgb(var(--gray-dark));
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.74rem;
+}
+
+.route-diff-phys {
+  color: rgb(var(--gray));
+  font-size: 0.74rem;
+}
+
 /* ── Sidebar actions ──────────────────────────────── */
 .bra-link {
   display: inline-block;
