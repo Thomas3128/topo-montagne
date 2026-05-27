@@ -5,7 +5,10 @@ export default function RouteRecap({ stops }: { stops: RouteStop[] }) {
 
   return (
     <div className="transport-route">
-      <div className="transport-route-header">Itinéraire</div>
+      <div className="transport-route-header">
+        Itinéraire
+        <a href="/aide" className="route-aide-link" title="Comment lire ce topo ?">?</a>
+      </div>
       <ol className="transport-chain">
         {stops.map((stop, i) => {
           const isLast = i === stops.length - 1;

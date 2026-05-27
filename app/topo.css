@@ -180,6 +180,25 @@
 .transport-leg-link:hover { color: var(--accent-dark); }
 
 /* ── Route recap ──────────────────────────────────── */
+.transport-route-header { display: flex; align-items: center; justify-content: space-between; }
+
+.route-aide-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border: 1px solid rgb(var(--gray));
+  border-radius: 50%;
+  color: rgb(var(--gray));
+  text-decoration: none;
+  line-height: 1;
+  transition: border-color 0.2s, color 0.2s;
+}
+.route-aide-link:hover { border-color: var(--accent); color: var(--accent); }
+
 .route-day-badge {
   display: inline-block;
   font-size: 0.68rem;
