@@ -1,0 +1,246 @@
+/* ── Topo detail / About / Récits pages ──────────── */
+.content-main { width: 100%; max-width: 100%; margin: 0; padding: 0; }
+
+.prose-wrapper {
+  min-width: 0;
+  width: 1400px;
+  max-width: calc(100% - 2em);
+  margin: auto;
+  padding: 1em;
+  color: rgb(var(--gray-dark));
+}
+
+/* ── Grille externe : article + sidebar(s) ────────── */
+.topo-outer-layout {
+  display: grid;
+  grid-template-columns: 1fr var(--sidebar-width);
+  gap: 1.5rem;
+  padding-top: 2em;
+  padding-bottom: 1em;
+  padding-left: max(1em, calc((100% - 1750px) / 2));
+  padding-right: max(1em, calc((100% - 1750px) / 2));
+  align-items: start;
+}
+
+.topo-outer-layout--transport {
+  grid-template-columns: var(--sidebar-width) 1fr var(--sidebar-width);
+}
+
+.topo-outer-layout .prose-wrapper {
+  width: auto;
+  max-width: none;
+  margin: 0;
+}
+
+.topo-sidebar {
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Photo + Carte ────────────────────────────────── */
+.topo-media {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.topo-photo {
+  position: relative;
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.topo-map { height: 600px; border-radius: 12px; }
+
+/* ── Fiche technique ──────────────────────────────── */
+.topo-info-panel {
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(233, 237, 201, 0.08);
+}
+
+.topo-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(233, 237, 201, 0.2);
+  border-bottom: 1px solid rgb(var(--gray-light));
+  padding: 1rem 0;
+}
+
+.topo-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid rgb(var(--gray-light));
+}
+.topo-stat:last-child { border-right: none; }
+.topo-stat-label { font-size: 0.75rem; color: rgb(var(--gray)); text-transform: uppercase; font-weight: 600; }
+.topo-stat-value { font-size: 1.3rem; font-weight: bold; color: rgb(var(--black)); }
+
+.topo-elevation { border-bottom: 1px solid rgb(var(--gray-light)); }
+
+.topo-fiche { padding: 1.25rem 1.5rem; }
+
+.topo-fiche-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.topo-fiche-table th,
+.topo-fiche-table td { padding: 0.45rem 0.75rem; text-align: left; border-bottom: 1px solid rgb(var(--gray-light)); }
+.topo-fiche-table tr:last-child th,
+.topo-fiche-table tr:last-child td { border-bottom: none; }
+.topo-fiche-table th { width: 40%; font-weight: 600; color: rgb(var(--gray-dark)); }
+.topo-fiche-table td { color: rgb(var(--gray-dark)); }
+
+.topo-text { margin-top: 2rem; }
+
+/* ── Transports en commun ─────────────────────────── */
+.transport-route {
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(233, 237, 201, 0.08);
+}
+
+.transport-route-header {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgb(var(--gray));
+  background: rgba(233, 237, 201, 0.2);
+  border-bottom: 1px solid rgb(var(--gray-light));
+}
+
+.transport-chain { list-style: none; margin: 0; padding: 1rem 1.25rem 0.5rem; }
+
+.transport-stop { display: flex; gap: 0.75rem; align-items: stretch; }
+
+.transport-node-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 18px;
+}
+
+.transport-node { font-size: 0.85rem; color: var(--accent); line-height: 1; padding-top: 2px; flex-shrink: 0; }
+
+.transport-node-line { width: 2px; flex: 1; min-height: 40px; background: rgb(var(--gray-light)); margin: 4px 0; }
+
+.transport-content-col { flex: 1; padding-bottom: 0.25rem; }
+
+.transport-stop-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgb(var(--black));
+  line-height: 1.3;
+  padding-top: 1px;
+}
+.transport-stop--dest .transport-stop-name { color: var(--accent); }
+
+.transport-leg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.4rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  padding: 0.35rem 0.6rem;
+  background: rgba(var(--gray-light), 0.5);
+  border-radius: 6px;
+  font-size: 0.78rem;
+}
+
+.transport-leg-icon { font-size: 0.9rem; line-height: 1; }
+.transport-leg-mode { font-weight: 700; color: rgb(var(--gray-dark)); }
+.transport-leg-ligne { color: rgb(var(--gray)); }
+
+.transport-leg-duree {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.74rem;
+}
+
+.transport-leg-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--accent);
+  white-space: nowrap;
+}
+.transport-leg-link:hover { color: var(--accent-dark); }
+
+/* ── Sidebar actions ──────────────────────────────── */
+.bra-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(188, 108, 37, 0.1);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.bra-link:hover { background: rgba(188, 108, 37, 0.2); color: var(--accent); }
+
+.download-buttons { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.dl-btn {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  border: 1px solid var(--accent);
+}
+.dl-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.dl-btn-pdf { background: var(--accent); color: #fff; }
+.dl-btn-pdf:hover:not(:disabled) { opacity: 0.85; }
+.dl-btn-gpx { background: transparent; color: var(--accent); }
+.dl-btn-gpx:hover { background: rgba(188, 108, 37, 0.1); }
+
+/* ── Contenu des pages ────────────────────────────── */
+.post-title { margin-bottom: 1em; padding: 1em 0; text-align: center; line-height: 1; }
+.post-title h1 { margin: 0 0 0.5em 0; }
+.post-date { margin-bottom: 0.5em; color: rgb(var(--gray)); }
+.last-updated-on { font-style: italic; }
+.hero-image { width: 100%; margin-top: 3rem; }
+.about-photo { width: 100%; max-height: 70vh; object-fit: cover; border-radius: 12px; }
+.signature-date { font-style: italic; opacity: 0.6; font-size: 0.9rem; text-align: right; margin-top: 2rem; }
+
+.recit-link { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgb(var(--gray-light)); text-align: right; }
+.recit-link a { display: inline-block; color: var(--accent); font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: opacity 0.2s; }
+.recit-link a:hover { opacity: 0.75; }
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 1100px) {
+  .topo-outer-layout--transport { grid-template-columns: 1fr var(--sidebar-width); }
+  .topo-outer-layout--transport .topo-sidebar:first-child { display: none; }
+}
+
+@media (max-width: 900px) {
+  .topo-outer-layout,
+  .topo-outer-layout--transport { grid-template-columns: 1fr; }
+  .topo-sidebar { position: static; }
+  .topo-media { grid-template-columns: 1fr; }
+  .topo-photo { height: 320px; }
+  .topo-map { height: 320px; }
+  .topo-map > div { height: 320px !important; }
+}

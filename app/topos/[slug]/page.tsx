@@ -41,6 +41,16 @@ export default async function TopoPage({ params }: Props) {
         {/* Sidebar gauche : transports en commun */}
         {frontmatter.transport?.length && (
           <aside className="topo-sidebar">
+            {frontmatter.braUrl && (
+            <a
+              href={frontmatter.braUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bra-link"
+            >
+              ❄️ Consulter le BRA
+            </a>
+          )}
             <TransportRoute stops={frontmatter.transport} />
           </aside>
         )}
@@ -90,16 +100,6 @@ export default async function TopoPage({ params }: Props) {
 
         {/* Sidebar sticky : BRA + profil + fiche */}
         <aside className="topo-sidebar">
-          {frontmatter.braUrl && (
-            <a
-              href={frontmatter.braUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bra-link"
-            >
-              ❄️ Consulter le BRA
-            </a>
-          )}
           <TopoInfoPanel
             gpxPath={frontmatter.gpxPath}
             gpxColor={frontmatter.gpxColor}
