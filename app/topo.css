@@ -17,8 +17,8 @@
   gap: 1.5rem;
   padding-top: 2em;
   padding-bottom: 1em;
-  padding-left: max(1em, calc((100% - 1750px) / 2));
-  padding-right: max(1em, calc((100% - 1750px) / 2));
+  padding-left: max(1em, calc((100% - 1750px) / 4));
+  padding-right: max(1em, calc((100% - 1750px) / 4));
   align-items: start;
 }
 

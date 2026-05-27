@@ -48,7 +48,7 @@ export default async function TopoPage({ params }: Props) {
               rel="noopener noreferrer"
               className="bra-link"
             >
-              ❄️ Consulter le BRA
+              Consulter le BRA (Avalanches)
             </a>
           )}
             <TransportRoute stops={frontmatter.transport} />
