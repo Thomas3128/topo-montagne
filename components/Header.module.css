@@ -4,7 +4,6 @@
   border-bottom: 1px solid rgb(var(--gray-light));
   position: relative;
   z-index: 100;
-  background: linear-gradient(var(--gray-gradient)) fixed;
 }
 .nav {
   display: flex;
