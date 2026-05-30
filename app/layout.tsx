@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { AuthProvider } from '@/components/AuthProvider';
 
 export const metadata: Metadata = {
-  title: 'La montagne vue par Dijs',
+  title: "L'appel des terres hautes",
   description: 'Topos et récits de montagne — randonnée, alpinisme, ski de rando.',
   icons: { icon: '/favicon.svg' },
 };

@@ -11,7 +11,7 @@ const filePath = path.join(process.cwd(), 'content/annexes/aide.mdx');
 export async function generateMetadata(): Promise<Metadata> {
   const { data } = matter(fs.readFileSync(filePath, 'utf-8'));
   return {
-    title: `${data.title} — La montagne vue par Dijs`,
+    title: `${data.title} — L'appel des terres hautes`,
     description: data.description,
   };
 }

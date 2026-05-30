@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import MaterielClient from '@/components/MaterielClient';
 
 export const metadata: Metadata = {
-  title: 'Que mettre dans son sac ? — La montagne vue par Dijs',
+  title: "Que mettre dans son sac ? — L'appel des terres hautes",
   description: 'Listes de matériel par type de sortie — rando journée, trek, alpinisme et sécurité.',
 };
 

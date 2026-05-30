@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import { useAuth } from './AuthProvider';
 
-const SITE_TITLE = 'La montagne vue par Dijs';
+const SITE_TITLE = "L'appel des terres hautes";
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   const pathname = usePathname();

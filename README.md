@@ -1,4 +1,4 @@
-# La montagne vue par Dijs
+# L'appel des terres hautes
 
 Site personnel de topos d'alpinisme et de randonnée en montagne, avec les récits qui vont avec.
 Construit pour avoir un endroit à moi pour partager les courses, les itinéraires, et les bons souvenirs — sans dépendre d'une plateforme tierce.

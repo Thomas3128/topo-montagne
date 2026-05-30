@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const topo = getTopoBySlug(slug);
   if (!topo) return {};
   return {
-    title: `${topo.frontmatter.title} — La montagne vue par Dijs`,
+    title: `${topo.frontmatter.title} — L'appel des terres hautes`,
     description: topo.frontmatter.description,
   };
 }

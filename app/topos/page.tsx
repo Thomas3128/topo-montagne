@@ -5,7 +5,7 @@ import { getAllTopos } from '@/lib/topos';
 import FormattedDate from '@/components/FormattedDate';
 
 export const metadata: Metadata = {
-  title: 'Topos — La montagne vue par Dijs',
+  title: "Topos — L'appel des terres hautes",
   description: 'Tous les topos de randonnée, alpinisme et ski de rando.',
 };
 

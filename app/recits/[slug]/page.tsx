@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const recit = getRecitBySlug(slug);
   if (!recit) return {};
   return {
-    title: `${recit.frontmatter.title} — La montagne vue par Dijs`,
+    title: `${recit.frontmatter.title} — L'appel des terres hautes`,
   };
 }
 

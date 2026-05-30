@@ -7,7 +7,7 @@ import FormattedDate from '@/components/FormattedDate';
 import LecturesGrid from '@/components/LecturesGrid';
 
 export const metadata: Metadata = {
-  title: 'Récits — La montagne vue par Dijs',
+  title: "Récits — L'appel des terres hautes",
   description: "Récits de courses et recommandations de lecture.",
 };
 

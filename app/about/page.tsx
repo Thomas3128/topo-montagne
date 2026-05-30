@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'À propos — La montagne vue par Dijs',
+  title: "À propos — L'appel des terres hautes",
   description: 'Mon parcours, de la plaine aux sommets, et la genèse de ce carnet de topos.',
 };
 
