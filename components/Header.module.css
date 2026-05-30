@@ -114,6 +114,21 @@
 
 .mobileActions { display: flex; align-items: center; gap: 20px; padding: 1rem 1.5rem; border-top: 1px solid rgb(var(--gray-light)); }
 
+.authBtn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.authBtn:hover { background: var(--accent); color: #fff; }
+
 @media (max-width: 640px) {
   .nav { height: 4.5rem; }
   .internalLinks, .headerActions { display: none; }

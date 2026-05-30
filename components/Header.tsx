@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
+import { useAuth } from './AuthProvider';
 
 const SITE_TITLE = 'La montagne vue par Dijs';
 
@@ -20,6 +21,9 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 export default function Header() {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
+  const pseudo = user?.user_metadata?.pseudo as string | undefined;
+
 
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains('dark'));
@@ -90,6 +94,13 @@ export default function Header() {
           <div className={styles.headerActions}>
             <ThemeToggle />
             <GitHubLink />
+            {user ? (
+              <Link href="/profil" className={styles.authBtn}>
+                {pseudo ?? 'Mon compte'}
+              </Link>
+            ) : (
+              <Link href="/connexion" className={styles.authBtn}>Connexion</Link>
+            )}
           </div>
 
           <button
@@ -120,6 +131,13 @@ export default function Header() {
         <div className={styles.mobileActions}>
           <ThemeToggle />
           <GitHubLink />
+          {user ? (
+            <Link href="/profil" className={styles.authBtn}>
+              {pseudo ?? 'Mon compte'}
+            </Link>
+          ) : (
+            <Link href="/connexion" className={styles.authBtn}>Connexion</Link>
+          )}
         </div>
       </div>
     </>
