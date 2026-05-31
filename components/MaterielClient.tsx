@@ -18,17 +18,30 @@ const SECTIONS: Section[] = [
           {
             titre: 'Navigation',
             items: [
-              'Carte IGN papier du secteur + boussole',
-              'Téléphone chargé avec appli hors-ligne (IGNrando, OrganicMaps…)',
+              "Carte IGN du secteur",
+              "Téléphone chargé avec application hors-ligne (Cartes IGN, Komoot, ...)",
+              "Montre avec fond de carte et trace GPX"
             ],
           },
           {
             titre: 'Sécurité',
             items: [
               'Couverture de survie',
-              'Sifflet',
+              'Sifflet (souvent intégré pour les sacs de rando)',
               'Lampe frontale + piles de rechange',
-              'Batterie externe',
+              'Batterie externe'
+            ],
+            
+          },
+          {
+            titre: 'Prévention',
+            items: [
+              'Traitement médical (si besoin)',
+              'Trousse de secours légère',
+              'Lunettes de soleil (cat. 3 mini)',
+              'Crême solaire (indice 50)',
+              'Baume à lèvres',
+              'Bâtons de randonnée'
             ],
           },
           {
@@ -36,7 +49,7 @@ const SECTIONS: Section[] = [
             items: [
               'Protections hygiéniques compactes (cup menstruelle ou tampons)',
               'Sachet zip pour déchets hygiéniques',
-              'Sous-vêtements de rechange supplémentaires',
+              'Sous-vêtements de rechange supplémentaires'
             ],
           },
         ],
@@ -54,24 +67,24 @@ const SECTIONS: Section[] = [
           {
             titre: 'Vêtements',
             items: [
-              'Couche de base respirante',
               'Couche intermédiaire (polaire ou softshell selon saison)',
-              'Coupe-vent ou imperméable',
+              'Veste imperméable',
               'Chapeau / casquette + buff',
-              'Gants légers (même en été en montagne)',
+              'Gants légers (selon saison)',
             ],
           },
           {
             titre: 'Nourriture & hydratation',
             items: [
-              '2 à 3 L d\'eau selon durée et chaleur',
-              'Repas + barres de rechange',
+              '2 à 4 L d\'eau selon durée et chaleur',
+              'Repas',
+              'Réserve énergétique (barres, gels, compotes)',
             ],
           },
           {
-            titre: 'Sécurité',
+            titre: 'Confort',
             items: [
-              'Trousse de premiers secours légère',
+              'Bâtons de randonnée',
             ],
           },
           {
@@ -88,28 +101,29 @@ const SECTIONS: Section[] = [
         label: '2 jours',
         cats: [
           {
-            titre: 'Nuit en refuge',
+            titre: 'En refuge',
             items: [
-              'Sursac / drap de soie',
-              'Couche de rechange (sous-vêtements, chaussettes)',
+              'Couche de rechange (sous-vêtements + chaussettes + t-shirt)',
               'Trousse de toilette légère',
+              'Drap de sac / sac à viandre'
             ],
           },
           {
-            titre: 'Bivouac (si hors refuge)',
+            titre: 'En bivouac',
             items: [
+              'Couche de rechange (sous-vêtements + chaussettes + t-shirt)',
+              'Trousse de toilette légère',
               'Sac de couchage adapté à la saison',
               'Matelas isolant',
-              'Tente légère ou abri',
+              'Tente légère ou tarp'
             ],
           },
           {
             titre: 'Confort',
             items: [
-              'Crème solaire indice élevé + protection lèvres',
-              'Lunettes de soleil catégorie 3 minimum',
               'Bâtons de randonnée',
-              'Guêtres (terrain humide ou enneigé)',
+              'Filtre à eau ou pastilles de purification',
+              'Housse de sac imperméable'
             ],
           },
           {
@@ -128,19 +142,18 @@ const SECTIONS: Section[] = [
         label: 'Multi-jours',
         cats: [
           {
-            titre: 'Alimentation autonome',
+            titre: 'Logistique',
             items: [
-              'Réchaud + popote + briquet',
-              'Filtre à eau ou pastilles de purification',
-              'Nourriture pour tous les jours + 1 jour de réserve',
+              '2eme short/pantalon',
+              'Cordelette multi-usage',
+              'Kit réparation léger (duct tape, ficelle, kit couture)',
             ],
           },
           {
-            titre: 'Logistique',
+            titre: 'Alimentation autonome',
             items: [
-              'Sac étanche ou housses imperméables',
-              'Cordelette multi-usage',
-              'Kit réparation léger (duct tape, ficelle, kit couture)',
+              'Réchaud + popote + briquet',
+              'Nourriture pour tous les jours + 1 jour de réserve',
             ],
           },
           {
@@ -168,11 +181,11 @@ const SECTIONS: Section[] = [
             titre: 'Toujours présent en alpi',
             items: [
               'Casque',
-              'Baudrier + longe(s)',
+              'Baudrier + longe',
               'Mousquetons à vis (2 minimum)',
               'Lunettes de glacier catégorie 4',
-              'Protection solaire renforcée (crème 50+ + stick lèvres)',
-              'Couches chaudes supplémentaires',
+              'Doudoune supplémentaire',
+              'Corde.s (la taille et le nombre dépendent de la course)'
             ],
           },
           {
@@ -191,16 +204,16 @@ const SECTIONS: Section[] = [
           {
             titre: 'Progression sur neige / glacier',
             items: [
+              'Chaussures d\'alpinisme rigides compatibles crampons',
               'Crampons adaptés aux chaussures',
               'Piolet',
               'Corde de glacier (30 à 40 m pour une cordée de 2)',
-              'Chaussures d\'alpinisme rigides compatibles crampons',
             ],
           },
           {
             titre: 'Sécurité glacier',
             items: [
-              'Broches à glace (minimum 2 par personne)',
+              'Broches à glace (min. 2 par personne)',
               'Matériel de mouflage (poulie + bloqueur)',
             ],
           },
@@ -229,8 +242,8 @@ const SECTIONS: Section[] = [
             titre: 'Nuit en refuge ou bivouac alpi',
             items: [
               'Sac de couchage adapté altitude (−10°C ou moins)',
-              'Matelas isolant haute performance',
-              'Nourriture haute calorie',
+              'Matelas isolant',
+              'Nourriture calorique',
               'Réchaud + popote adaptés altitude',
             ],
           },
