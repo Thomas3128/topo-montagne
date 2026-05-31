@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 type Categorie = { titre: string; items: string[] };
 type Onglet = { id: string; label: string; cats: Categorie[] };
-type Section = { id: string; titre: string; onglets: Onglet[] };
+type Section = { id: string; titre: string; description?: string; onglets: Onglet[] };
 
 const SECTIONS: Section[] = [
   {
@@ -18,38 +18,42 @@ const SECTIONS: Section[] = [
           {
             titre: 'Navigation',
             items: [
-              "Carte IGN du secteur",
-              "Téléphone chargé avec application hors-ligne (Cartes IGN, Komoot, ...)",
-              "Montre avec fond de carte et trace GPX"
+              'Carte IGN du secteur',
+              'Téléphone chargé avec application hors-ligne (Cartes IGN, Komoot…)',
+              'Montre avec fond de carte et trace GPX',
             ],
           },
           {
             titre: 'Sécurité',
             items: [
               'Couverture de survie',
-              'Sifflet (souvent intégré pour les sacs de rando)',
+              'Sifflet (souvent intégré au sac)',
               'Lampe frontale + piles de rechange',
-              'Batterie externe'
+              'Batterie externe',
             ],
-            
           },
           {
             titre: 'Prévention',
             items: [
-              'Traitement médical (si besoin)',
+              'Traitement médical personnel (si besoin)',
               'Trousse de secours légère',
-              'Lunettes de soleil (cat. 3 mini)',
-              'Crême solaire (indice 50)',
+              'Lunettes de soleil (cat. 3 minimum)',
+              'Crème solaire indice 50',
               'Baume à lèvres',
-              'Bâtons de randonnée'
+              'Bâtons de randonnée',
             ],
           },
           {
-            titre: 'Spécifique femmes',
+            titre: 'En cas de règles',
             items: [
-              'Protections hygiéniques compactes (cup menstruelle ou tampons)',
+              'Protections hygiéniques',
               'Sachet zip pour déchets hygiéniques',
-              'Sous-vêtements de rechange supplémentaires'
+              'Antidouleurs si cycles douloureux',
+              'Sous-vêtements de rechange supplémentaires',
+              'Sachet zip étanche pour déchets',
+              'Culotte menstruelle ?',
+              'Gel hydroalcoolique'
+
             ],
           },
         ],
@@ -59,6 +63,7 @@ const SECTIONS: Section[] = [
   {
     id: 'rando',
     titre: 'Randonnée',
+    description: "Cette liste est un point de départ large. Chacun adapte selon son expérience, ses habitudes et la sortie du jour. Certains partiront légers avec moins, d'autres préféreront avoir plus.",
     onglets: [
       {
         id: 'rando-1j',
@@ -82,16 +87,9 @@ const SECTIONS: Section[] = [
             ],
           },
           {
-            titre: 'Confort',
+            titre: 'En cas de règles',
             items: [
-              'Bâtons de randonnée',
-            ],
-          },
-          {
-            titre: 'Spécifique femmes',
-            items: [
-              'Protection solaire adaptée',
-              'Crème anti-irritations si longue marche',
+              'Crème protectrice / anti-irritations',
             ],
           },
         ],
@@ -101,38 +99,52 @@ const SECTIONS: Section[] = [
         label: '2 jours',
         cats: [
           {
-            titre: 'En refuge',
+            titre: 'Vêtements',
             items: [
               'Couche de rechange (sous-vêtements + chaussettes + t-shirt)',
-              'Trousse de toilette légère',
-              'Drap de sac / sac à viandre'
             ],
           },
           {
-            titre: 'En bivouac',
+            titre: 'Nourriture & hydratation',
             items: [
-              'Couche de rechange (sous-vêtements + chaussettes + t-shirt)',
-              'Trousse de toilette légère',
-              'Sac de couchage adapté à la saison',
-              'Matelas isolant',
-              'Tente légère ou tarp'
-            ],
-          },
-          {
-            titre: 'Confort',
-            items: [
-              'Bâtons de randonnée',
               'Filtre à eau ou pastilles de purification',
-              'Housse de sac imperméable'
             ],
           },
           {
-            titre: 'Spécifique femmes',
+            titre: 'Hygiène',
             items: [
-              'Culotte menstruelle de rechange',
-              'Cup menstruelle ou tampons pour 2 jours',
-              'Sachet zip étanche pour déchets',
-              'Crème protectrice / anti-irritations',
+              'Trousse de toilette légère',
+              'Serviette',
+              'Sac poubelle'
+            ],
+          },
+          {
+            titre: 'Logistique',
+            items: [
+              'Housse de sac imperméable',
+            ],
+          },
+          {
+            titre: 'Refuge',
+            items: [
+              'Drap de sac / sac à viandre',
+            ],
+          },
+          {
+            titre: 'Bivouac',
+            items: [
+              'Réchaud + popote + briquet + couverts',
+              'Sac de couchage adapté à la saison',
+              'Tente légère ou tarp',
+              'Matelas isolant',
+            ],
+          },
+          {
+            titre: 'En cas de règles',
+            items: [
+              'Culotte menstruelle de rechange ?',
+              'Protections hygiéniques pour plusieurs jours',
+              'Lingettes intimes'
             ],
           },
         ],
@@ -142,27 +154,29 @@ const SECTIONS: Section[] = [
         label: 'Multi-jours',
         cats: [
           {
+            titre: 'Vêtements',
+            items: [
+              '2ème short / pantalon',
+            ],
+          },
+          {
+            titre: 'Nourriture & hydratation',
+            items: [
+              'Nourriture pour les prochains jours',
+            ],
+          },
+          {
             titre: 'Logistique',
             items: [
-              '2eme short/pantalon',
               'Cordelette multi-usage',
               'Kit réparation léger (duct tape, ficelle, kit couture)',
             ],
           },
           {
-            titre: 'Alimentation autonome',
-            items: [
-              'Réchaud + popote + briquet',
-              'Nourriture pour tous les jours + 1 jour de réserve',
-            ],
-          },
-          {
-            titre: 'Spécifique femmes',
+            titre: 'En cas de règles',
             items: [
               'Stock suffisant de protections (prévoir large)',
-              'Antidouleurs si cycles douloureux',
               'Lingettes intimes biodégradables',
-              'Sous-vêtements techniques supplémentaires',
             ],
           },
         ],
@@ -172,53 +186,48 @@ const SECTIONS: Section[] = [
   {
     id: 'alpi',
     titre: 'Alpinisme',
+    description: "En alpinisme, savoir gérer le poids du sac est important. On peut faire des concessions, mais pas sur tout. Le matériel de sécurité n'est pas négociable. Pour le reste, l'expérience et le jugement priment sur n'importe quelle liste.",
     onglets: [
-      {
-        id: 'alpi-fond',
-        label: 'Fond de sac',
-        cats: [
-          {
-            titre: 'Toujours présent en alpi',
-            items: [
-              'Casque',
-              'Baudrier + longe',
-              'Mousquetons à vis (2 minimum)',
-              'Lunettes de glacier catégorie 4',
-              'Doudoune supplémentaire',
-              'Corde.s (la taille et le nombre dépendent de la course)'
-            ],
-          },
-          {
-            titre: 'Spécifique femmes',
-            items: [
-              'Baudrier adapté à la morphologie féminine si possible',
-              'Cup menstruelle recommandée — pratique en milieu engagé',
-            ],
-          },
-        ],
-      },
       {
         id: 'alpi-1j',
         label: '1 jour',
         cats: [
           {
-            titre: 'Progression sur neige / glacier',
+            titre: 'Équipement technique',
+            items: [
+              'Doudoune',
+              'Casque',
+              'Baudrier + longe + Mousqueton à vis',
+              'Lunettes de glacier (cat. 4)',
+              'Corde — taille et nombre selon la course',
+              'Assureur reverso + mousquetion directionnel',
+              'Cordelette de rappel',
+            ],
+          },
+          {
+            titre: 'Glacier',
             items: [
               'Chaussures d\'alpinisme rigides compatibles crampons',
               'Crampons adaptés aux chaussures',
               'Piolet',
               'Corde de glacier (30 à 40 m pour une cordée de 2)',
-            ],
-          },
-          {
-            titre: 'Sécurité glacier',
-            items: [
               'Broches à glace (min. 2 par personne)',
-              'Matériel de mouflage (poulie + bloqueur)',
+              'Matériel de mouflage (tibloc, microtrac, sangles…)',
+              'Mousquetons simples et à vis',
             ],
           },
           {
-            titre: 'Terrain enneigé',
+            titre: 'Crête / falaise',
+            items: [
+              'Chaussons d\'escalade',
+              'Jeu de friends',
+              'Jeu de bloqueurs',
+              'Sangles + mousquetons',
+              'Dégaines',
+            ],
+          },
+          {
+            titre: 'Neige',
             items: [
               'DVA (détecteur de victimes d\'avalanche)',
               'Sonde à avalanche',
@@ -226,10 +235,9 @@ const SECTIONS: Section[] = [
             ],
           },
           {
-            titre: 'Spécifique femmes',
+            titre: 'En cas de règles',
             items: [
-              'Cup menstruelle fortement conseillée (pas de déchets en milieu glaciaire)',
-              'Sous-vêtements thermiques supplémentaires',
+              'Crème protectrice / anti-irritations',
             ],
           },
         ],
@@ -239,27 +247,24 @@ const SECTIONS: Section[] = [
         label: 'Multi-jours',
         cats: [
           {
-            titre: 'Nuit en refuge ou bivouac alpi',
+            titre: 'Nuit en altitude',
             items: [
-              'Sac de couchage adapté altitude (−10°C ou moins)',
-              'Matelas isolant',
-              'Nourriture calorique',
-              'Réchaud + popote adaptés altitude',
+              'Sac de couchage −10 °C minimum',
+              'Nourriture haute calorie',
+              'Réchaud haute altitude (vérifier fonctionnement en conditions extrêmes)',
             ],
           },
           {
             titre: 'Logistique',
             items: [
-              'Cordelettes de rappel',
               'Bivy bag (bivouac d\'urgence)',
-              'Communication hors réseau (SPOT ou Garmin inReach)',
+              'Communication hors réseau (SPOT, Garmin inReach, ...)',
             ],
           },
           {
-            titre: 'Spécifique femmes',
+            titre: 'En cas de règles',
             items: [
               'Stock de protections pour toute la durée + réserve',
-              'Sous-vêtements thermiques techniques supplémentaires',
               'Crème anti-irritations pour les longues journées',
             ],
           },
@@ -272,30 +277,28 @@ const SECTIONS: Section[] = [
 export default function MaterielClient() {
   const [activeOnglets, setActiveOnglets] = useState<Record<string, string>>({
     rando: 'rando-1j',
-    alpi: 'alpi-fond',
+    alpi: 'alpi-1j',
   });
-
-  const getActiveOnglet = (section: Section): Onglet => {
-    const id = activeOnglets[section.id];
-    return section.onglets.find(o => o.id === id) ?? section.onglets[0];
-  };
 
   return (
     <div className="materiel">
       {SECTIONS.map(section => {
         const hasTabs = section.onglets.length > 1;
-        const onglet = getActiveOnglet(section);
+        const activeId = activeOnglets[section.id];
+        const activeIndex = section.onglets.findIndex(o => o.id === (activeId ?? section.onglets[0].id));
+        const visibleOnglets = section.onglets.slice(0, activeIndex + 1);
 
         return (
           <div key={section.id} className="materiel-section">
             <h2 className="materiel-section-titre">{section.titre}</h2>
+            {section.description && <p className="materiel-section-desc">{section.description}</p>}
 
             {hasTabs && (
               <div className="materiel-tabs">
                 {section.onglets.map(o => (
                   <button
                     key={o.id}
-                    className={`materiel-tab${onglet.id === o.id ? ' active' : ''}`}
+                    className={`materiel-tab${o.id === (activeId ?? section.onglets[0].id) ? ' active' : ''}`}
                     onClick={() => setActiveOnglets(prev => ({ ...prev, [section.id]: o.id }))}
                   >
                     {o.label}
@@ -305,14 +308,32 @@ export default function MaterielClient() {
             )}
 
             <div className="materiel-content">
-              {onglet.cats.map(cat => (
-                <div key={cat.titre} className="materiel-category">
-                  <h3 className="materiel-category-titre">{cat.titre}</h3>
-                  <ul className="materiel-list">
-                    {cat.items.map(item => <li key={item}>{item}</li>)}
-                  </ul>
-                </div>
-              ))}
+              {(() => {
+                  const merged = visibleOnglets
+                    .flatMap(o => o.cats)
+                    .reduce<Categorie[]>((acc, cat) => {
+                      const existing = acc.find(c => c.titre === cat.titre);
+                      if (existing) {
+                        existing.items = [...existing.items, ...cat.items];
+                      } else {
+                        acc.push({ ...cat, items: [...cat.items] });
+                      }
+                      return acc;
+                    }, []);
+                  const sf = merged.find(c => c.titre === 'En cas de règles');
+                  const rest = merged.filter(c => c.titre !== 'En cas de règles');
+                  if (sf) rest.splice(3, 0, sf);
+                  return rest;
+                })()
+                .map(cat => (
+                  <div key={cat.titre} className="materiel-category">
+                    <h3 className="materiel-category-titre">{cat.titre}</h3>
+                    <ul className="materiel-list">
+                      {cat.items.map(item => <li key={item}>{item}</li>)}
+                    </ul>
+                  </div>
+                ))
+              }
             </div>
           </div>
         );

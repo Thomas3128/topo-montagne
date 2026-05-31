@@ -512,6 +512,19 @@ hr { border: none; border-top: 1px solid rgb(var(--gray-light)); }
   padding: 1.5rem;
 }
 
+.materiel-level-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin: 1.2rem 0 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgb(var(--gray-light));
+}
+
+.materiel-section-desc { margin: -0.5rem 0 1rem; font-size: 0.9rem; color: rgb(var(--gray)); font-style: italic; }
+
 .materiel-section-titre {
   font-size: 1.1rem;
   font-weight: 700;
