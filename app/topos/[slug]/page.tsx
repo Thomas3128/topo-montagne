@@ -10,6 +10,8 @@ import DownloadButtons from '@/components/DownloadButtons';
 import TransportRoute from '@/components/TransportRoute';
 import RouteRecap from '@/components/RouteRecap';
 import Comments from '@/components/Comments';
+import Photo from '@/components/mdx/Photo';
+import Gallery from '@/components/mdx/Gallery';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -80,7 +82,7 @@ export default async function TopoPage({ params }: Props) {
           )}
 
           <div className="topo-text">
-            <MDXRemote source={content} />
+            <MDXRemote source={content} components={{ Photo, Gallery }} />
           </div>
 
           {frontmatter.recitSlug && (

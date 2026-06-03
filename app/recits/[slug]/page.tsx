@@ -6,6 +6,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllRecits, getRecitBySlug } from '@/lib/recits';
 import { getTopoBySlug } from '@/lib/topos';
 import FormattedDate from '@/components/FormattedDate';
+import Photo from '@/components/mdx/Photo';
+import Gallery from '@/components/mdx/Gallery';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -58,7 +60,7 @@ export default async function RecitPage({ params }: Props) {
         )}
 
         <div className="topo-text">
-          <MDXRemote source={content} />
+          <MDXRemote source={content} components={{ Photo, Gallery }} />
         </div>
 
       </article>
