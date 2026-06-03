@@ -93,7 +93,11 @@
 .topo-fiche-table th { width: 40%; font-weight: 600; color: rgb(var(--gray-dark)); }
 .topo-fiche-table td { color: rgb(var(--gray-dark)); }
 
-.topo-text { margin-top: 2rem; }
+.topo-text {
+  margin-top: 2rem;
+  text-align: justify;
+  hyphens: auto;
+}
 
 /* ── Transports en commun ─────────────────────────── */
 .transport-route {
@@ -272,9 +276,12 @@
 
 /* ── Photos MDX ───────────────────────────────────── */
 .mdx-photo {
-  margin: 2rem 0;
   padding: 0;
   cursor: zoom-in;
+  margin: 0.25rem 0 1.5rem 2rem;
+  float: right;
+  max-width: 50%;
+  width: 50%;
 }
 
 .mdx-photo-img {
@@ -286,6 +293,33 @@
   transition: opacity 0.15s;
 }
 .mdx-photo:hover .mdx-photo-img { opacity: 0.92; }
+
+/* Les titres et séparateurs nettoient le float */
+.topo-text h2,
+.topo-text h3,
+.topo-text h4,
+.topo-text hr { clear: both; }
+
+/* La galerie nettoie le float et reprend toute la largeur */
+.mdx-gallery { clear: both; }
+
+/* Les photos dans une galerie ne flottent pas et remplissent leur cellule */
+.mdx-gallery .mdx-photo {
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Mobile : plus de float, pleine largeur */
+@media (max-width: 720px) {
+  .mdx-photo {
+    float: none;
+    width: 100% !important;
+    max-width: 100%;
+    margin: 1.5rem 0;
+  }
+}
 
 /* ── Lightbox ─────────────────────────────────────── */
 .lightbox-backdrop {

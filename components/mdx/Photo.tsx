@@ -17,7 +17,7 @@ export default function Photo({ src, caption, alt, width }: Props) {
     <>
       <figure
         className="mdx-photo"
-        style={width ? { width: `${width}%`, marginLeft: 'auto', marginRight: 'auto' } : undefined}
+        style={width ? { width: `${width}%` } : undefined}
         onClick={() => setOpen(true)}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
