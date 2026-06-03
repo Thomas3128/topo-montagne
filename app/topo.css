@@ -274,6 +274,7 @@
 .mdx-photo {
   margin: 2rem 0;
   padding: 0;
+  cursor: zoom-in;
 }
 
 .mdx-photo-img {
@@ -282,6 +283,68 @@
   display: block;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.15s;
+}
+.mdx-photo:hover .mdx-photo-img { opacity: 0.92; }
+
+/* ── Lightbox ─────────────────────────────────────── */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2001;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.28); }
+
+.lightbox-img-wrap {
+  transform-origin: center center;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.lightbox-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
 }
 
 .mdx-photo-caption {
