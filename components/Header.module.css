@@ -2,10 +2,15 @@
   margin: 0;
   padding: 0 1em;
   border-bottom: 1px solid rgb(var(--gray-light));
-  position: relative;
-  z-index: 100;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
   background: #fffae0;
   box-shadow: 0 2px 8px rgba(107, 112, 92, 0.12);
+  transition: box-shadow 0.3s ease;
+}
+.header.scrolled {
+  box-shadow: 0 2px 12px rgba(107, 112, 92, 0.22);
 }
 :global(.dark) 
 .header { 
@@ -19,23 +24,27 @@
   justify-content: space-between;
   height: 4rem;
   width: 100%;
+  transition: height 0.3s ease;
 }
+.scrolled .nav { height: 2.75rem; }
 .brand { display: flex; align-items: center; flex-shrink: 0; }
 .brand h2 { margin: 0; font-size: 1.2em; }
 .brand a { text-decoration: none; color: rgb(var(--black)); }
 .brand a:hover { color: var(--accent); }
 
-.internalLinks { display: flex; flex-direction: row; align-items: center; gap: 1rem; margin: 0 auto; }
+.internalLinks { display: flex; flex-direction: row; align-self: stretch; align-items: stretch; gap: 1rem; margin: 0 auto; }
 .internalLinks a {
-  padding: 1em 0.5em;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5em;
   color: rgb(var(--gray-dark));
-  border-bottom: 4px solid transparent;
   text-decoration: none;
-  transition: color 0.2s;
+  box-shadow: inset 0 0 0 transparent;
+  transition: color 0.2s, box-shadow 0.2s;
 }
 .internalLinks a:hover { color: var(--accent); }
 .internalLinks a.active {
-  border-bottom-color: var(--accent);
+  box-shadow: inset 0 4px 0 var(--accent);
   color: rgb(var(--black));
 }
 

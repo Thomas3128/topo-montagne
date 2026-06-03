@@ -21,12 +21,18 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 export default function Header() {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { user } = useAuth();
   const pseudo = user?.user_metadata?.pseudo as string | undefined;
 
-
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains('dark'));
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -76,7 +82,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className={`${styles.header}${scrolled ? ` ${styles.scrolled}` : ''}`}>
         <nav className={styles.nav}>
           <div className={styles.brand}>
             <h2><Link href="/">{SITE_TITLE}</Link></h2>
