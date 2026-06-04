@@ -19,7 +19,7 @@ export default function MaterielPage() {
           Le meilleur équipement est celui que vous savez utiliser.
         </p>
         <p className="materiel-intro">
-          La rubrique <em>En cas de règles</em> a été rédigée par des amies pratiquantes,
+          La rubrique <em>En cas de menstruations</em> a été rédigée par des amies pratiquantes,
           pour être au plus près de la réalité. Chaque personne est différente,
           ces suggestions restent un point de départ, à adapter selon ses propres besoins et habitudes.
         </p>

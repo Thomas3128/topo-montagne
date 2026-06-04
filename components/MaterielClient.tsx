@@ -44,16 +44,15 @@ const SECTIONS: Section[] = [
             ],
           },
           {
-            titre: 'En cas de règles',
+            titre: 'En cas de menstruations',
             items: [
               'Protections hygiéniques',
-              'Sachet zip pour déchets hygiéniques',
               'Antidouleurs si cycles douloureux',
               'Sous-vêtements de rechange supplémentaires',
               'Sachet zip étanche pour déchets',
               'Culotte menstruelle ?',
-              'Gel hydroalcoolique'
-
+              'Gel hydroalcoolique',
+              'Crème anti-irritations'
             ],
           },
         ],
@@ -85,13 +84,7 @@ const SECTIONS: Section[] = [
               'Repas',
               'Réserve énergétique (barres, gels, compotes)',
             ],
-          },
-          {
-            titre: 'En cas de règles',
-            items: [
-              'Crème protectrice / anti-irritations',
-            ],
-          },
+          }
         ],
       },
       {
@@ -140,11 +133,9 @@ const SECTIONS: Section[] = [
             ],
           },
           {
-            titre: 'En cas de règles',
+            titre: 'En cas de menstruations',
             items: [
-              'Culotte menstruelle de rechange ?',
-              'Protections hygiéniques pour plusieurs jours',
-              'Lingettes intimes'
+              'Stock suffisant de protections'
             ],
           },
         ],
@@ -171,14 +162,7 @@ const SECTIONS: Section[] = [
               'Cordelette multi-usage',
               'Kit réparation léger (duct tape, ficelle, kit couture)',
             ],
-          },
-          {
-            titre: 'En cas de règles',
-            items: [
-              'Stock suffisant de protections (prévoir large)',
-              'Lingettes intimes biodégradables',
-            ],
-          },
+          }
         ],
       },
     ],
@@ -233,13 +217,7 @@ const SECTIONS: Section[] = [
               'Sonde à avalanche',
               'Pelle à neige',
             ],
-          },
-          {
-            titre: 'En cas de règles',
-            items: [
-              'Crème protectrice / anti-irritations',
-            ],
-          },
+          }
         ],
       },
       {
@@ -262,10 +240,9 @@ const SECTIONS: Section[] = [
             ],
           },
           {
-            titre: 'En cas de règles',
+            titre: 'En cas de menstruations',
             items: [
-              'Stock de protections pour toute la durée + réserve',
-              'Crème anti-irritations pour les longues journées',
+              'Stock suffisant de protections'
             ],
           },
         ],
@@ -320,9 +297,9 @@ export default function MaterielClient() {
                       }
                       return acc;
                     }, []);
-                  const sf = merged.find(c => c.titre === 'En cas de règles');
-                  const rest = merged.filter(c => c.titre !== 'En cas de règles');
-                  if (sf) rest.splice(3, 0, sf);
+                  const sf = merged.find(c => c.titre === 'En cas de menstruations');
+                  const rest = merged.filter(c => c.titre !== 'En cas de menstruations');
+                  if (sf) rest.push(sf);
                   return rest;
                 })()
                 .map(cat => (
