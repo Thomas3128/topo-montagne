@@ -17,14 +17,13 @@ export default function Photo({ src, caption, alt, width }: Props) {
     <>
       <figure
         className="mdx-photo"
-        style={width ? { width: `${width}%` } : undefined}
+        style={width ? { width: `${width}%`, maxWidth: `${width}%` } : undefined}
         onClick={() => setOpen(true)}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt ?? caption ?? ''} className="mdx-photo-img" />
         {caption && <figcaption className="mdx-photo-caption">{caption}</figcaption>}
       </figure>
-
       {open && <Lightbox src={src} alt={alt ?? caption} onClose={() => setOpen(false)} />}
     </>
   );

@@ -294,15 +294,6 @@
 }
 .mdx-photo:hover .mdx-photo-img { opacity: 0.92; }
 
-/* Les titres et séparateurs nettoient le float */
-.topo-text h2,
-.topo-text h3,
-.topo-text h4,
-.topo-text hr { clear: both; }
-
-/* La galerie nettoie le float et reprend toute la largeur */
-.mdx-gallery { clear: both; }
-
 /* Les photos dans une galerie ne flottent pas et remplissent leur cellule */
 .mdx-gallery .mdx-photo {
   float: none;
@@ -391,6 +382,7 @@
 }
 
 .mdx-gallery {
+  clear: both;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
