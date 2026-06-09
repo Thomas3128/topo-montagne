@@ -280,6 +280,7 @@
   cursor: zoom-in;
   margin: 0.25rem 0 1.5rem 2rem;
   float: right;
+  clear: right;
   max-width: 50%;
   width: 50%;
 }
