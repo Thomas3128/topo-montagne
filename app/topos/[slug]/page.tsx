@@ -9,7 +9,6 @@ import TopoInfoPanel from '@/components/TopoInfoPanel';
 import DownloadButtons from '@/components/DownloadButtons';
 import TransportRoute from '@/components/TransportRoute';
 import RouteRecap from '@/components/RouteRecap';
-import Comments from '@/components/Comments';
 import Photo from '@/components/mdx/Photo';
 import Gallery from '@/components/mdx/Gallery';
 
@@ -116,7 +115,6 @@ export default async function TopoPage({ params }: Props) {
         </aside>
 
       </div>
-      <Comments slug={slug} />
     </main>
   );
 }

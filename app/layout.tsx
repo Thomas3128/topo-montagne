@@ -3,8 +3,6 @@ import './globals.css';
 import './topo.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { AuthProvider } from '@/components/AuthProvider';
-
 export const metadata: Metadata = {
   title: "L'appel des terres hautes",
   description: 'Topos et récits de montagne — randonnée, alpinisme, ski de rando.',
@@ -23,11 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <AuthProvider>
-          <Header />
-          {children}
-          <Footer />
-        </AuthProvider>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
