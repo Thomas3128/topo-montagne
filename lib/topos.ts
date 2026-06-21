@@ -40,6 +40,7 @@ export interface TopoFrontmatter {
   route?: RouteStop[];
   recitSlug?: string;
   braUrl?: string;
+  jours?: { titre: string }[];
 }
 
 export interface Topo {

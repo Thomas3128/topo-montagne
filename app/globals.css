@@ -348,6 +348,56 @@ hr { border: none; border-top: 1px solid rgb(var(--gray-light)); }
 .comment-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 .comment-submit:hover:not(:disabled) { opacity: 0.85; }
 
+/* ── Jour picker ──────────────────────────────────── */
+.jour-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.5rem 0 0;
+}
+.jour-btn {
+  min-width: 2.4rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 8px;
+  background: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgb(var(--gray));
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.jour-btn:hover { border-color: var(--accent); color: var(--accent); }
+.jour-btn--active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.jour-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.75rem 0 1.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 10px;
+  background: rgba(233, 237, 201, 0.06);
+}
+.jour-nav {
+  background: none;
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 8px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: rgb(var(--gray-dark));
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s;
+}
+.jour-nav:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.jour-nav:disabled { opacity: 0.3; cursor: default; }
+.jour-header-title { flex: 1; min-width: 0; }
+.jour-header-num { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+.jour-header-titre { display: block; font-size: 1rem; font-weight: 700; color: rgb(var(--black)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 /* ── Home page ────────────────────────────────────── */
 
 /* Hero plein écran */

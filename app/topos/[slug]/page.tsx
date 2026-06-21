@@ -11,6 +11,8 @@ import TransportRoute from '@/components/TransportRoute';
 import RouteRecap from '@/components/RouteRecap';
 import Photo from '@/components/mdx/Photo';
 import Gallery from '@/components/mdx/Gallery';
+import Jour from '@/components/mdx/Jour';
+import JourProvider from '@/components/JourProvider';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -80,9 +82,17 @@ export default async function TopoPage({ params }: Props) {
             </div>
           )}
 
-          <div className="topo-text">
-            <MDXRemote source={content} components={{ Photo, Gallery }} />
-          </div>
+          {frontmatter.jours?.length ? (
+            <JourProvider titres={frontmatter.jours.map(j => j.titre)}>
+              <div className="topo-text">
+                <MDXRemote source={content} components={{ Photo, Gallery, Jour }} />
+              </div>
+            </JourProvider>
+          ) : (
+            <div className="topo-text">
+              <MDXRemote source={content} components={{ Photo, Gallery }} />
+            </div>
+          )}
 
           {frontmatter.recitSlug && (
             <div className="recit-link">
