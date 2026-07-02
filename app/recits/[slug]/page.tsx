@@ -10,6 +10,7 @@ import Photo from '@/components/mdx/Photo';
 import Gallery from '@/components/mdx/Gallery';
 import Jour from '@/components/mdx/Jour';
 import JourProvider from '@/components/JourProvider';
+import JourHeroImage from '@/components/JourHeroImage';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -55,25 +56,31 @@ export default async function RecitPage({ params }: Props) {
           <hr />
         </div>
 
-        {frontmatter.heroImage && (
-          <div className="topo-photo" style={{ marginBottom: '2rem' }}>
-            <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-          </div>
-        )}
-
         {frontmatter.jours?.length ? (
           <JourProvider
             titres={frontmatter.jours.map(j => j.titre)}
             labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
           >
+            <JourHeroImage
+              images={frontmatter.jours.map(j => j.heroImage)}
+              fallback={frontmatter.heroImage}
+              style={{ marginBottom: '2rem' }}
+            />
             <div className="topo-text">
               <MDXRemote source={content} components={{ Photo, Gallery, Jour }} />
             </div>
           </JourProvider>
         ) : (
-          <div className="topo-text">
-            <MDXRemote source={content} components={{ Photo, Gallery }} />
-          </div>
+          <>
+            {frontmatter.heroImage && (
+              <div className="topo-photo" style={{ marginBottom: '2rem' }}>
+                <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+              </div>
+            )}
+            <div className="topo-text">
+              <MDXRemote source={content} components={{ Photo, Gallery }} />
+            </div>
+          </>
         )}
 
       </article>

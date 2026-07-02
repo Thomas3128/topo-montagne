@@ -13,6 +13,7 @@ import Photo from '@/components/mdx/Photo';
 import Gallery from '@/components/mdx/Gallery';
 import Jour from '@/components/mdx/Jour';
 import JourProvider from '@/components/JourProvider';
+import JourHeroImage from '@/components/JourHeroImage';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -67,31 +68,45 @@ export default async function TopoPage({ params }: Props) {
             <hr />
           </div>
 
-          {(frontmatter.heroImage || frontmatter.gpxPath) && (
-            <div className="topo-media">
-              {frontmatter.heroImage && (
-                <div className="topo-photo">
-                  <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-                </div>
-              )}
-              {frontmatter.gpxPath && (
-                <div className="topo-map">
-                  <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
-                </div>
-              )}
-            </div>
-          )}
-
           {frontmatter.jours?.length ? (
             <JourProvider titres={frontmatter.jours.map(j => j.titre)}>
+              {(frontmatter.jours.some(j => j.heroImage) || frontmatter.heroImage || frontmatter.gpxPath) && (
+                <div className="topo-media">
+                  <JourHeroImage
+                    images={frontmatter.jours.map(j => j.heroImage)}
+                    fallback={frontmatter.heroImage}
+                  />
+                  {frontmatter.gpxPath && (
+                    <div className="topo-map">
+                      <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="topo-text">
                 <MDXRemote source={content} components={{ Photo, Gallery, Jour }} />
               </div>
             </JourProvider>
           ) : (
-            <div className="topo-text">
-              <MDXRemote source={content} components={{ Photo, Gallery }} />
-            </div>
+            <>
+              {(frontmatter.heroImage || frontmatter.gpxPath) && (
+                <div className="topo-media">
+                  {frontmatter.heroImage && (
+                    <div className="topo-photo">
+                      <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+                    </div>
+                  )}
+                  {frontmatter.gpxPath && (
+                    <div className="topo-map">
+                      <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
+                    </div>
+                  )}
+                </div>
+              )}
+              <div className="topo-text">
+                <MDXRemote source={content} components={{ Photo, Gallery }} />
+              </div>
+            </>
           )}
 
           {frontmatter.recitSlug && (

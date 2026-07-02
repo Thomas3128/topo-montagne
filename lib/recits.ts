@@ -9,7 +9,7 @@ export interface RecitFrontmatter {
   topoSlug?: string;
   pubDate: string;
   heroImage?: string;
-  jours?: { titre: string; label?: string }[];
+  jours?: { titre: string; label?: string; heroImage?: string }[];
 }
 
 export interface Recit {
