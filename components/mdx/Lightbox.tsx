@@ -5,10 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 interface Props {
   src: string;
   alt?: string;
+  caption?: string;
   onClose: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
 }
 
-export default function Lightbox({ src, alt, onClose }: Props) {
+export default function Lightbox({ src, alt, caption, onClose, onPrev, onNext }: Props) {
   const wrapRef  = useRef<HTMLDivElement>(null);
   const scaleRef = useRef(1);
   const posRef   = useRef({ x: 0, y: 0 });
@@ -18,14 +21,18 @@ export default function Lightbox({ src, alt, onClose }: Props) {
 
   // ESC + bloquer le scroll de la page
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft' && onPrev) onPrev();
+      if (e.key === 'ArrowRight' && onNext) onNext();
+    };
     window.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [onClose]);
+  }, [onClose, onPrev, onNext]);
 
   // Zoom / pan — tout via DOM pour éviter les re-renders
   useEffect(() => {
@@ -152,13 +159,36 @@ export default function Lightbox({ src, alt, onClose }: Props) {
     <div className="lightbox-backdrop" onClick={onClose}>
       <button className="lightbox-close" onClick={onClose} aria-label="Fermer">✕</button>
 
+      {onPrev && (
+        <button
+          className="lightbox-nav lightbox-nav--prev"
+          onClick={(e) => { e.stopPropagation(); onPrev(); }}
+          aria-label="Photo précédente"
+        >
+          ‹
+        </button>
+      )}
+
       <div ref={wrapRef} className="lightbox-img-wrap" onClick={e => e.stopPropagation()}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt ?? ''} className="lightbox-img" draggable={false} />
       </div>
 
+      {onNext && (
+        <button
+          className="lightbox-nav lightbox-nav--next"
+          onClick={(e) => { e.stopPropagation(); onNext(); }}
+          aria-label="Photo suivante"
+        >
+          ›
+        </button>
+      )}
+
       {isZoomed && (
         <div className="lightbox-hint">Double-clic pour réinitialiser</div>
+      )}
+      {!isZoomed && caption && (
+        <div className="lightbox-caption">{caption}</div>
       )}
     </div>
   );

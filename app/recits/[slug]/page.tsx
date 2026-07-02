@@ -9,8 +9,11 @@ import FormattedDate from '@/components/FormattedDate';
 import Photo from '@/components/mdx/Photo';
 import Gallery from '@/components/mdx/Gallery';
 import Jour from '@/components/mdx/Jour';
+import PhotoLink from '@/components/mdx/PhotoLink';
 import JourProvider from '@/components/JourProvider';
 import JourHeroImage from '@/components/JourHeroImage';
+import PhotoGalleryProvider from '@/components/PhotoGalleryProvider';
+import PhotoGallery from '@/components/PhotoGallery';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -41,47 +44,53 @@ export default async function RecitPage({ params }: Props) {
     <main className="content-main">
       <article className="prose-wrapper">
 
-        <div className="post-title">
-          <div className="post-date">
-            <FormattedDate date={frontmatter.pubDate} />
-          </div>
-          <h1>{frontmatter.title}</h1>
-          {topo && (
-            <p style={{ marginTop: '0.5rem', fontSize: '0.95rem' }}>
-              <Link href={`/topos/${frontmatter.topoSlug}`} style={{ color: 'var(--accent)' }}>
-                ← Voir le topo : {topo.frontmatter.title}
-              </Link>
-            </p>
-          )}
-          <hr />
-        </div>
+        <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
 
-        {frontmatter.jours?.length ? (
-          <JourProvider
-            titres={frontmatter.jours.map(j => j.titre)}
-            labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
-          >
-            <JourHeroImage
-              images={frontmatter.jours.map(j => j.heroImage)}
-              fallback={frontmatter.heroImage}
-              style={{ marginBottom: '2rem' }}
-            />
-            <div className="topo-text">
-              <MDXRemote source={content} components={{ Photo, Gallery, Jour }} />
+          <div className="post-title">
+            <div className="post-date">
+              <FormattedDate date={frontmatter.pubDate} />
             </div>
-          </JourProvider>
-        ) : (
-          <>
-            {frontmatter.heroImage && (
-              <div className="topo-photo" style={{ marginBottom: '2rem' }}>
-                <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-              </div>
+            <h1>{frontmatter.title}</h1>
+            {topo && (
+              <p style={{ marginTop: '0.5rem', fontSize: '0.95rem' }}>
+                <Link href={`/topos/${frontmatter.topoSlug}`} style={{ color: 'var(--accent)' }}>
+                  ← Voir le topo : {topo.frontmatter.title}
+                </Link>
+              </p>
             )}
-            <div className="topo-text">
-              <MDXRemote source={content} components={{ Photo, Gallery }} />
-            </div>
-          </>
-        )}
+            <hr />
+          </div>
+
+          {frontmatter.jours?.length ? (
+            <JourProvider
+              titres={frontmatter.jours.map(j => j.titre)}
+              labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
+            >
+              <JourHeroImage
+                images={frontmatter.jours.map(j => j.heroImage)}
+                fallback={frontmatter.heroImage}
+                style={{ marginBottom: '2rem' }}
+              />
+              <div className="topo-text">
+                <MDXRemote source={content} components={{ Photo, Gallery, Jour, PhotoLink }} />
+              </div>
+            </JourProvider>
+          ) : (
+            <>
+              {frontmatter.heroImage && (
+                <div className="topo-photo" style={{ marginBottom: '2rem' }}>
+                  <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+                </div>
+              )}
+              <div className="topo-text">
+                <MDXRemote source={content} components={{ Photo, Gallery, PhotoLink }} />
+              </div>
+            </>
+          )}
+
+          <PhotoGallery />
+
+        </PhotoGalleryProvider>
 
       </article>
     </main>

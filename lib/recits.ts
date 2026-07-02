@@ -4,12 +4,20 @@ import matter from 'gray-matter';
 
 const RECITS_DIR = path.join(process.cwd(), 'content/recits');
 
+export interface RecitPhoto {
+  id: string;
+  src: string;
+  caption?: string;
+  alt?: string;
+}
+
 export interface RecitFrontmatter {
   title: string;
   topoSlug?: string;
   pubDate: string;
   heroImage?: string;
   jours?: { titre: string; label?: string; heroImage?: string }[];
+  photos?: RecitPhoto[];
 }
 
 export interface Recit {
