@@ -12,8 +12,11 @@ import RouteRecap from '@/components/RouteRecap';
 import Photo from '@/components/mdx/Photo';
 import Gallery from '@/components/mdx/Gallery';
 import Jour from '@/components/mdx/Jour';
+import PhotoLink from '@/components/mdx/PhotoLink';
 import JourProvider from '@/components/JourProvider';
 import JourHeroImage from '@/components/JourHeroImage';
+import PhotoGalleryProvider from '@/components/PhotoGalleryProvider';
+import PhotoGallery from '@/components/PhotoGallery';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -55,65 +58,71 @@ export default async function TopoPage({ params }: Props) {
         {/* Contenu principal */}
         <article className="prose-wrapper">
 
-          <div className="post-title">
-            <div className="post-date">
-              <FormattedDate date={frontmatter.pubDate} />
-              {frontmatter.updatedDate && (
-                <div className="last-updated-on">
-                  Mis à jour le <FormattedDate date={frontmatter.updatedDate} />
-                </div>
-              )}
-            </div>
-            <h1>{frontmatter.title}</h1>
-            <hr />
-          </div>
+          <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
 
-          {frontmatter.jours?.length ? (
-            <JourProvider titres={frontmatter.jours.map(j => j.titre)}>
-              {(frontmatter.jours.some(j => j.heroImage) || frontmatter.heroImage || frontmatter.gpxPath) && (
-                <div className="topo-media">
-                  <JourHeroImage
-                    images={frontmatter.jours.map(j => j.heroImage)}
-                    fallback={frontmatter.heroImage}
-                  />
-                  {frontmatter.gpxPath && (
-                    <div className="topo-map">
-                      <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
-                    </div>
-                  )}
-                </div>
-              )}
-              <div className="topo-text">
-                <MDXRemote source={content} components={{ Photo, Gallery, Jour }} />
+            <div className="post-title">
+              <div className="post-date">
+                <FormattedDate date={frontmatter.pubDate} />
+                {frontmatter.updatedDate && (
+                  <div className="last-updated-on">
+                    Mis à jour le <FormattedDate date={frontmatter.updatedDate} />
+                  </div>
+                )}
               </div>
-            </JourProvider>
-          ) : (
-            <>
-              {(frontmatter.heroImage || frontmatter.gpxPath) && (
-                <div className="topo-media">
-                  {frontmatter.heroImage && (
-                    <div className="topo-photo">
-                      <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-                    </div>
-                  )}
-                  {frontmatter.gpxPath && (
-                    <div className="topo-map">
-                      <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
-                    </div>
-                  )}
-                </div>
-              )}
-              <div className="topo-text">
-                <MDXRemote source={content} components={{ Photo, Gallery }} />
-              </div>
-            </>
-          )}
-
-          {frontmatter.recitSlug && (
-            <div className="recit-link">
-              <a href={`/recits/${frontmatter.recitSlug}`}>Lire le récit →</a>
+              <h1>{frontmatter.title}</h1>
+              <hr />
             </div>
-          )}
+
+            {frontmatter.jours?.length ? (
+              <JourProvider titres={frontmatter.jours.map(j => j.titre)}>
+                {(frontmatter.jours.some(j => j.heroImage) || frontmatter.heroImage || frontmatter.gpxPath) && (
+                  <div className="topo-media">
+                    <JourHeroImage
+                      images={frontmatter.jours.map(j => j.heroImage)}
+                      fallback={frontmatter.heroImage}
+                    />
+                    {frontmatter.gpxPath && (
+                      <div className="topo-map">
+                        <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div className="topo-text">
+                  <MDXRemote source={content} components={{ Photo, Gallery, Jour, PhotoLink }} />
+                </div>
+              </JourProvider>
+            ) : (
+              <>
+                {(frontmatter.heroImage || frontmatter.gpxPath) && (
+                  <div className="topo-media">
+                    {frontmatter.heroImage && (
+                      <div className="topo-photo">
+                        <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+                      </div>
+                    )}
+                    {frontmatter.gpxPath && (
+                      <div className="topo-map">
+                        <Map gpxPath={frontmatter.gpxPath} color={frontmatter.gpxColor} />
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div className="topo-text">
+                  <MDXRemote source={content} components={{ Photo, Gallery, PhotoLink }} />
+                </div>
+              </>
+            )}
+
+            {frontmatter.recitSlug && (
+              <div className="recit-link">
+                <a href={`/recits/${frontmatter.recitSlug}`}>Lire le récit →</a>
+              </div>
+            )}
+
+            <PhotoGallery />
+
+          </PhotoGalleryProvider>
 
         </article>
 

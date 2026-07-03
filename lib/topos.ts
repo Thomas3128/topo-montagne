@@ -27,6 +27,13 @@ export interface RouteStop {
   diffPhys?: string;
 }
 
+export interface TopoPhoto {
+  id: string;
+  src: string;
+  caption?: string;
+  alt?: string;
+}
+
 export interface TopoFrontmatter {
   title: string;
   description: string;
@@ -41,6 +48,7 @@ export interface TopoFrontmatter {
   recitSlug?: string;
   braUrl?: string;
   jours?: { titre: string; heroImage?: string }[];
+  photos?: TopoPhoto[];
 }
 
 export interface Topo {
