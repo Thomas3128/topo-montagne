@@ -44,53 +44,53 @@ export default async function RecitPage({ params }: Props) {
     <main className="content-main">
       <article className="prose-wrapper">
 
-        <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
-
-          <div className="post-title">
-            <div className="post-date">
-              <FormattedDate date={frontmatter.pubDate} />
-            </div>
-            <h1>{frontmatter.title}</h1>
-            {topo && (
-              <p style={{ marginTop: '0.5rem', fontSize: '0.95rem' }}>
-                <Link href={`/topos/${frontmatter.topoSlug}`} style={{ color: 'var(--accent)' }}>
-                  ← Voir le topo : {topo.frontmatter.title}
-                </Link>
-              </p>
-            )}
-            <hr />
+        <div className="post-title">
+          <div className="post-date">
+            <FormattedDate date={frontmatter.pubDate} />
           </div>
+          <h1>{frontmatter.title}</h1>
+          {topo && (
+            <p style={{ marginTop: '0.5rem', fontSize: '0.95rem' }}>
+              <Link href={`/topos/${frontmatter.topoSlug}`} style={{ color: 'var(--accent)' }}>
+                ← Voir le topo : {topo.frontmatter.title}
+              </Link>
+            </p>
+          )}
+          <hr />
+        </div>
 
-          {frontmatter.jours?.length ? (
-            <JourProvider
-              titres={frontmatter.jours.map(j => j.titre)}
-              labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
-            >
-              <JourHeroImage
-                images={frontmatter.jours.map(j => j.heroImage)}
-                fallback={frontmatter.heroImage}
-                style={{ marginBottom: '2rem' }}
-              />
+        {frontmatter.jours?.length ? (
+          <JourProvider
+            titres={frontmatter.jours.map(j => j.titre)}
+            labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
+          >
+            <JourHeroImage
+              images={frontmatter.jours.map(j => j.heroImage)}
+              fallback={frontmatter.heroImage}
+              style={{ marginBottom: '2rem' }}
+            />
+            <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
               <div className="topo-text">
                 <MDXRemote source={content} components={{ Photo, Gallery, Jour, PhotoLink }} />
               </div>
-            </JourProvider>
-          ) : (
-            <>
-              {frontmatter.heroImage && (
-                <div className="topo-photo" style={{ marginBottom: '2rem' }}>
-                  <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-                </div>
-              )}
+              <PhotoGallery />
+            </PhotoGalleryProvider>
+          </JourProvider>
+        ) : (
+          <>
+            {frontmatter.heroImage && (
+              <div className="topo-photo" style={{ marginBottom: '2rem' }}>
+                <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
+              </div>
+            )}
+            <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
               <div className="topo-text">
                 <MDXRemote source={content} components={{ Photo, Gallery, PhotoLink }} />
               </div>
-            </>
-          )}
-
-          <PhotoGallery />
-
-        </PhotoGalleryProvider>
+              <PhotoGallery />
+            </PhotoGalleryProvider>
+          </>
+        )}
 
       </article>
     </main>
