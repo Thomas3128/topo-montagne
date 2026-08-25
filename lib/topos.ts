@@ -47,7 +47,7 @@ export interface TopoFrontmatter {
   route?: RouteStop[];
   recitSlug?: string;
   braUrl?: string;
-  jours?: { titre: string; heroImage?: string }[];
+  jours?: { titre: string; heroImage?: string; gpxPath?: string; ficheTechnique?: FicheRow[] }[];
   photos?: TopoPhoto[];
 }
 

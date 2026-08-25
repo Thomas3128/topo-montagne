@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { useJour } from './JourProvider';
 
 interface FicheRow { label: string; value: string; }
 
 interface Props {
   gpxPath?: string;
+  gpxPaths?: (string | undefined)[];
   braUrl?: string;
   topoTitle: string;
   topoContent: string;
@@ -166,8 +168,10 @@ function parseGpxStats(xml: string) {
 }
 
 // ── Component ────────────────────────────────────────────────────────────────
-export default function DownloadButtons({ gpxPath, braUrl, topoTitle, topoContent, ficheTechnique }: Props) {
+export default function DownloadButtons({ gpxPath, gpxPaths, braUrl, topoTitle, topoContent, ficheTechnique }: Props) {
   const [loading, setLoading] = useState(false);
+  const selected = useJour();
+  const activeGpxPath = gpxPaths?.[selected - 1] ?? gpxPath;
 
   const handlePdf = async () => {
     setLoading(true);
@@ -211,8 +215,8 @@ export default function DownloadButtons({ gpxPath, braUrl, topoTitle, topoConten
       }
 
       // Stats GPX
-      if (gpxPath) {
-        const xml = await fetch(gpxPath).then((r) => r.text());
+      if (activeGpxPath) {
+        const xml = await fetch(activeGpxPath).then((r) => r.text());
         const { dist, gain, loss } = parseGpxStats(xml);
         doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(80, 80, 80);
         doc.text(`Distance : ${dist.toFixed(1)} km  |  D+ : ${Math.round(gain)} m  |  D- : ${Math.round(loss)} m`, margin, y);
@@ -239,8 +243,8 @@ export default function DownloadButtons({ gpxPath, braUrl, topoTitle, topoConten
       <button className="dl-btn dl-btn-pdf" onClick={handlePdf} disabled={loading}>
         {loading ? 'Génération…' : '⬇ Télécharger le topo (PDF)'}
       </button>
-      {gpxPath && (
-        <a className="dl-btn dl-btn-gpx" href={gpxPath} download>
+      {activeGpxPath && (
+        <a className="dl-btn dl-btn-gpx" href={activeGpxPath} download>
           ⬇ Télécharger le GPX
         </a>
       )}

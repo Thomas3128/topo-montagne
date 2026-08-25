@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useJour } from './JourProvider';
 
 interface FicheRow {
   label: string;
@@ -16,8 +17,10 @@ interface GpxStats {
 
 interface Props {
   gpxPath?: string;
+  gpxPaths?: (string | undefined)[];
   gpxColor?: string;
   ficheTechnique?: FicheRow[];
+  ficheTechniques?: (FicheRow[] | undefined)[];
 }
 
 function haversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
@@ -134,18 +137,22 @@ function ElevationChart({ elevData, color }: { elevData: [number, number][]; col
   return <div ref={chartRef} style={{ height: '160px', width: '100%' }} />;
 }
 
-export default function TopoInfoPanel({ gpxPath, gpxColor = '#bc6c25', ficheTechnique }: Props) {
+export default function TopoInfoPanel({ gpxPath, gpxPaths, gpxColor = '#bc6c25', ficheTechnique, ficheTechniques }: Props) {
   const [stats, setStats] = useState<GpxStats | null>(null);
+  const selected = useJour();
+  const activeGpxPath = gpxPaths?.[selected - 1] ?? gpxPath;
+  const activeFicheTechnique = ficheTechniques?.[selected - 1] ?? ficheTechnique;
 
   useEffect(() => {
-    if (!gpxPath) return;
-    fetch(gpxPath)
+    if (!activeGpxPath) return;
+    setStats(null);
+    fetch(activeGpxPath)
       .then((r) => r.text())
       .then((xml) => setStats(parseGpx(xml)))
       .catch(() => {});
-  }, [gpxPath]);
+  }, [activeGpxPath]);
 
-  const hasContent = gpxPath || (ficheTechnique && ficheTechnique.length > 0);
+  const hasContent = activeGpxPath || (activeFicheTechnique && activeFicheTechnique.length > 0);
   if (!hasContent) return null;
 
   return (
@@ -177,11 +184,11 @@ export default function TopoInfoPanel({ gpxPath, gpxColor = '#bc6c25', ficheTech
       )}
 
       {/* Fiche technique */}
-      {ficheTechnique && ficheTechnique.length > 0 && (
+      {activeFicheTechnique && activeFicheTechnique.length > 0 && (
         <div className="topo-fiche">
           <table className="topo-fiche-table">
             <tbody>
-              {ficheTechnique.map((row) => (
+              {activeFicheTechnique.map((row) => (
                 <tr key={row.label}>
                   <th>{row.label}</th>
                   <td>{row.value}</td>

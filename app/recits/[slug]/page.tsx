@@ -11,6 +11,7 @@ import Gallery from '@/components/mdx/Gallery';
 import Jour from '@/components/mdx/Jour';
 import PhotoLink from '@/components/mdx/PhotoLink';
 import JourProvider from '@/components/JourProvider';
+import JourNav from '@/components/JourNav';
 import JourHeroImage from '@/components/JourHeroImage';
 import PhotoGalleryProvider from '@/components/PhotoGalleryProvider';
 import PhotoGallery from '@/components/PhotoGallery';
@@ -64,6 +65,7 @@ export default async function RecitPage({ params }: Props) {
             titres={frontmatter.jours.map(j => j.titre)}
             labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
           >
+            <JourNav />
             <JourHeroImage
               images={frontmatter.jours.map(j => j.heroImage)}
               fallback={frontmatter.heroImage}
