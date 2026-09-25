@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { RouteStop } from '@/lib/topos';
 
 export default function RouteRecap({ stops }: { stops: RouteStop[] }) {
@@ -7,7 +8,7 @@ export default function RouteRecap({ stops }: { stops: RouteStop[] }) {
     <div className="transport-route">
       <div className="transport-route-header">
         Itinéraire
-        <a href="/aide" className="route-aide-link" title="Comment lire ce topo ?">?</a>
+        <Link href="/aide" className="route-aide-link" title="Comment lire ce topo ?">?</Link>
       </div>
       <ol className="transport-chain">
         {stops.map((stop, i) => {

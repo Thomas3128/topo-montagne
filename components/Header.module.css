@@ -5,17 +5,12 @@
   position: sticky;
   top: 0;
   z-index: 1001;
-  background: #fffae0;
+  background: var(--surface);
   box-shadow: 0 2px 8px rgba(107, 112, 92, 0.12);
   transition: box-shadow 0.3s ease;
 }
 .header.scrolled {
   box-shadow: 0 2px 12px rgba(107, 112, 92, 0.22);
-}
-:global(.dark) 
-.header { 
-  background: #0f1a0c; 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3); 
 }
 .nav {
   display: flex;
@@ -53,32 +48,6 @@
 .githubLink { display: flex; align-items: center; justify-content: center; color: rgb(var(--gray-dark)); transition: color 0.2s ease; }
 .githubLink:hover { color: var(--accent); }
 
-.themeSwitch { cursor: pointer; border: none; background: none; padding: 0; display: flex; align-items: center; }
-.switchTrack {
-  width: 54px; height: 28px;
-  background-color: rgb(var(--gray-light));
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 9999px;
-  position: relative;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.switchHandle {
-  width: 22px; height: 22px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  position: absolute; top: 2px; left: 2px;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background-color 0.3s ease;
-}
-.icon { position: absolute; transition: opacity 0.2s ease, transform 0.3s ease; color: #0f1219; }
-.iconVisible { opacity: 1; transform: scale(1); }
-.iconHidden { opacity: 0; transform: scale(0.6); }
-
-:global(.dark) .switchTrack { background-color: #1e293b; border-color: rgba(255,255,255,0.1); }
-:global(.dark) .switchHandle { transform: translateX(26px); background-color: #020617; }
-:global(.dark) .icon { color: #ffffff; }
-
 .burgerBtn {
   display: none;
   flex-direction: column;
@@ -92,7 +61,6 @@
   transition: background-color 0.2s;
 }
 .burgerBtn:hover { background-color: rgba(0,0,0,0.06); }
-:global(.dark) .burgerBtn:hover { background-color: rgba(255,255,255,0.08); }
 .burgerBar {
   display: block; width: 22px; height: 2px;
   background-color: rgb(var(--gray-dark));
@@ -107,14 +75,13 @@
 .mobileMenu {
   display: none;
   flex-direction: column;
-  background-color: white;
+  background-color: var(--surface);
   border-bottom: 1px solid rgb(var(--gray-light));
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.35s ease, opacity 0.25s ease;
   opacity: 0;
 }
-:global(.dark) .mobileMenu { background-color: rgb(var(--black)); }
 .mobileMenuOpen { max-height: 400px; opacity: 1; }
 
 .mobileNav { display: flex; flex-direction: column; padding: 0.5rem 1.5rem; }
@@ -129,21 +96,6 @@
 .mobileNav a.active { color: var(--accent); font-weight: 600; }
 
 .mobileActions { display: flex; align-items: center; gap: 20px; padding: 1rem 1.5rem; border-top: 1px solid rgb(var(--gray-light)); }
-
-.authBtn {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--accent);
-  background: none;
-  border: 1px solid var(--accent);
-  border-radius: 8px;
-  padding: 0.3rem 0.75rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
-}
-.authBtn:hover { background: var(--accent); color: #fff; }
 
 @media (max-width: 640px) {
   .nav { height: 4.5rem; }

@@ -120,7 +120,7 @@ const SECTIONS: Section[] = [
           {
             titre: 'Refuge',
             items: [
-              'Drap de sac / sac à viandre',
+              'Drap de sac / sac à viande',
             ],
           },
           {
@@ -181,10 +181,10 @@ const SECTIONS: Section[] = [
             items: [
               'Doudoune',
               'Casque',
-              'Baudrier + longe + Mousqueton à vis',
+              'Baudrier + longe + mousqueton à vis',
               'Lunettes de glacier (cat. 4)',
               'Corde — taille et nombre selon la course',
-              'Assureur reverso + mousquetion directionnel',
+              'Assureur reverso + mousqueton directionnel',
               'Cordelette de rappel',
             ],
           },

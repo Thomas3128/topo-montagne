@@ -11,15 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <head>
-        {/* Script bloquant : lit localStorage avant le rendu pour éviter le flash de thème */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');if(t==='dark')document.documentElement.classList.add('dark');})();`,
-          }}
-        />
-      </head>
+    <html lang="fr">
       <body>
         <Header />
         {children}

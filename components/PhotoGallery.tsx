@@ -16,7 +16,7 @@ export default function PhotoGallery() {
         {photos.map((photo) => (
           <figure key={photo.id} className="mdx-photo" onClick={() => open(photo.id)}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={photo.src} alt={photo.alt ?? photo.caption ?? ''} className="mdx-photo-img" />
+            <img src={photo.src} alt={photo.alt ?? photo.caption ?? ''} className="mdx-photo-img" loading="lazy" decoding="async" />
             {photo.caption && <figcaption className="mdx-photo-caption">{photo.caption}</figcaption>}
           </figure>
         ))}

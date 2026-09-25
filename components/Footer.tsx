@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
     <footer>
-      &copy; {new Date().getFullYear()} Thomas D. All rights reserved.
+      &copy; {new Date().getFullYear()} Thomas D. Tous droits réservés.
       <div className="social-links">
         <a href="https://github.com/Thomas3128/topo-montagne" target="_blank" rel="noopener noreferrer">
-          <span className="sr-only">Go to my GitHub repo</span>
+          <span className="sr-only">Voir le dépôt GitHub</span>
           <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
             <path
               fill="currentColor"

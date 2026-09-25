@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
           src="/images/bannière_accueil.jpg"
           alt="Bannière d'accueil"
           fill
+          sizes="100vw"
           style={{ objectFit: 'cover', objectPosition: 'center center' }}
           priority
         />
@@ -15,7 +17,7 @@ export default function Home() {
         <div className="hero-content">
           <p className="hero-eyebrow">Topos · Récits · Montagne</p>
           <h1 className="hero-title">L'appel des terres hautes</h1>
-          <a href="/topos" className="hero-cta">Explorer les topos →</a>
+          <Link href="/topos" className="hero-cta">Explorer les topos →</Link>
         </div>
       </div>
 
@@ -43,21 +45,21 @@ export default function Home() {
         <hr />
 
         <section className="home-grid">
-          <a href="/topos" className="card">
+          <Link href="/topos" className="card">
             <h3>Topos</h3>
             <p>Des itinéraires détaillés, des traces GPX et les infos essentielles pour préparer ta sortie.</p>
             <span className="btn-link">Voir les topos →</span>
-          </a>
-          <a href="/recits" className="card">
+          </Link>
+          <Link href="/recits" className="card">
             <h3>Récits</h3>
             <p>Les histoires derrière les ascensions — les galères, les panoramas, les silences.</p>
             <span className="btn-link">Lire les récits →</span>
-          </a>
-          <a href="/about" className="card">
+          </Link>
+          <Link href="/about" className="card">
             <h3>À propos</h3>
             <p>Qui se cache derrière le sac à dos ? Ma philosophie de la montagne.</p>
             <span className="btn-link">En savoir plus →</span>
-          </a>
+          </Link>
         </section>
 
         <section className="quote-box">

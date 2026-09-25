@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import type { FicheRow } from '@/lib/topos';
+import { loadGpxStats } from '@/lib/gpx';
 import { useJour } from './JourProvider';
-
-interface FicheRow { label: string; value: string; }
 
 interface Props {
   gpxPath?: string;
@@ -12,7 +12,6 @@ interface Props {
   topoTitle: string;
   topoContent: string;
   ficheTechnique?: FicheRow[];
-  gpxColor?: string;
 }
 
 // ── Inline segments ──────────────────────────────────────────────────────────
@@ -143,35 +142,14 @@ function renderBlocks(doc: any, blocks: Block[], margin: number, contentW: numbe
   return y;
 }
 
-// ── GPX stats ────────────────────────────────────────────────────────────────
-function haversine(la1: number, lo1: number, la2: number, lo2: number) {
-  const R = 6371000, dLa = ((la2 - la1) * Math.PI) / 180, dLo = ((lo2 - lo1) * Math.PI) / 180;
-  const a = Math.sin(dLa / 2) ** 2 + Math.cos((la1 * Math.PI) / 180) * Math.cos((la2 * Math.PI) / 180) * Math.sin(dLo / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function parseGpxStats(xml: string) {
-  const pts = Array.from(new DOMParser().parseFromString(xml, 'application/xml').querySelectorAll('trkpt'));
-  let dist = 0, gain = 0, loss = 0, pLat = 0, pLon = 0, pEle = 0;
-  for (let i = 0; i < pts.length; i++) {
-    const lat = parseFloat(pts[i].getAttribute('lat') ?? '0');
-    const lon = parseFloat(pts[i].getAttribute('lon') ?? '0');
-    const ele = parseFloat(pts[i].querySelector('ele')?.textContent ?? '0');
-    if (i > 0) {
-      dist += haversine(pLat, pLon, lat, lon);
-      const d = ele - pEle;
-      if (d > 0) gain += d; else loss += Math.abs(d);
-    }
-    pLat = lat; pLon = lon; pEle = ele;
-  }
-  return { dist: dist / 1000, gain, loss };
-}
-
 // ── Component ────────────────────────────────────────────────────────────────
 export default function DownloadButtons({ gpxPath, gpxPaths, braUrl, topoTitle, topoContent, ficheTechnique }: Props) {
   const [loading, setLoading] = useState(false);
   const selected = useJour();
-  const activeGpxPath = gpxPaths?.[selected - 1] ?? gpxPath;
+  const dayGpxPath = gpxPaths?.[selected - 1];
+  const activeGpxPath = dayGpxPath ?? gpxPath;
+  // Le PDF couvre tout le topo : trace globale si elle existe, sinon cumul des jours
+  const pdfGpxPaths = gpxPath ? [gpxPath] : (gpxPaths ?? []).filter((p): p is string => !!p);
 
   const handlePdf = async () => {
     setLoading(true);
@@ -215,9 +193,11 @@ export default function DownloadButtons({ gpxPath, gpxPaths, braUrl, topoTitle, 
       }
 
       // Stats GPX
-      if (activeGpxPath) {
-        const xml = await fetch(activeGpxPath).then((r) => r.text());
-        const { dist, gain, loss } = parseGpxStats(xml);
+      if (pdfGpxPaths.length) {
+        const all = await Promise.all(pdfGpxPaths.map(loadGpxStats));
+        const dist = all.reduce((t, s) => t + s.distance, 0);
+        const gain = all.reduce((t, s) => t + s.elevGain, 0);
+        const loss = all.reduce((t, s) => t + s.elevLoss, 0);
         doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(80, 80, 80);
         doc.text(`Distance : ${dist.toFixed(1)} km  |  D+ : ${Math.round(gain)} m  |  D- : ${Math.round(loss)} m`, margin, y);
         y += 8;
@@ -245,7 +225,7 @@ export default function DownloadButtons({ gpxPath, gpxPaths, braUrl, topoTitle, 
       </button>
       {activeGpxPath && (
         <a className="dl-btn dl-btn-gpx" href={activeGpxPath} download>
-          ⬇ Télécharger le GPX
+          ⬇ Télécharger le GPX{dayGpxPath ? ` (jour ${selected})` : ''}
         </a>
       )}
     </div>

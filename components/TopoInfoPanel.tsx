@@ -1,19 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import type { FicheRow } from '@/lib/topos';
+import { loadGpxStats, type GpxStats } from '@/lib/gpx';
 import { useJour } from './JourProvider';
-
-interface FicheRow {
-  label: string;
-  value: string;
-}
-
-interface GpxStats {
-  distance: number;
-  elevGain: number;
-  elevLoss: number;
-  elevData: [number, number][];
-}
 
 interface Props {
   gpxPath?: string;
@@ -21,54 +11,6 @@ interface Props {
   gpxColor?: string;
   ficheTechnique?: FicheRow[];
   ficheTechniques?: (FicheRow[] | undefined)[];
-}
-
-function haversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371000;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function parseGpx(xml: string): GpxStats {
-  const doc = new DOMParser().parseFromString(xml, 'application/xml');
-  const pts = Array.from(doc.querySelectorAll('trkpt'));
-
-  let distance = 0;
-  let elevGain = 0;
-  let elevLoss = 0;
-  const elevData: [number, number][] = [];
-
-  for (let i = 0; i < pts.length; i++) {
-    const lat = parseFloat(pts[i].getAttribute('lat') ?? '0');
-    const lon = parseFloat(pts[i].getAttribute('lon') ?? '0');
-    const ele = parseFloat(pts[i].querySelector('ele')?.textContent ?? '0');
-
-    if (i > 0) {
-      const prev = pts[i - 1];
-      const d = haversine(
-        parseFloat(prev.getAttribute('lat') ?? '0'),
-        parseFloat(prev.getAttribute('lon') ?? '0'),
-        lat,
-        lon
-      );
-      distance += d;
-
-      const prevEle = parseFloat(prev.querySelector('ele')?.textContent ?? '0');
-      const diff = ele - prevEle;
-      if (diff > 0) elevGain += diff;
-      else elevLoss += Math.abs(diff);
-    }
-
-    elevData.push([distance / 1000, ele]);
-  }
-
-  return { distance: distance / 1000, elevGain, elevLoss, elevData };
 }
 
 function ElevationChart({ elevData, color }: { elevData: [number, number][]; color: string }) {
@@ -144,12 +86,14 @@ export default function TopoInfoPanel({ gpxPath, gpxPaths, gpxColor = '#bc6c25',
   const activeFicheTechnique = ficheTechniques?.[selected - 1] ?? ficheTechnique;
 
   useEffect(() => {
-    if (!activeGpxPath) return;
     setStats(null);
-    fetch(activeGpxPath)
-      .then((r) => r.text())
-      .then((xml) => setStats(parseGpx(xml)))
+    if (!activeGpxPath) return;
+    // Évite qu'une réponse lente d'un jour précédent écrase celle du jour affiché
+    let cancelled = false;
+    loadGpxStats(activeGpxPath)
+      .then((s) => { if (!cancelled) setStats(s); })
       .catch(() => {});
+    return () => { cancelled = true; };
   }, [activeGpxPath]);
 
   const hasContent = activeGpxPath || (activeFicheTechnique && activeFicheTechnique.length > 0);

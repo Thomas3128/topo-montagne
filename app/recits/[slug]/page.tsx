@@ -1,17 +1,14 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllRecits, getRecitBySlug } from '@/lib/recits';
 import { getTopoBySlug } from '@/lib/topos';
 import FormattedDate from '@/components/FormattedDate';
-import Photo from '@/components/mdx/Photo';
-import Gallery from '@/components/mdx/Gallery';
-import Jour from '@/components/mdx/Jour';
-import PhotoLink from '@/components/mdx/PhotoLink';
+import { mdxComponents } from '@/components/mdx';
+import Citation from '@/components/mdx/Citation';
 import JourProvider from '@/components/JourProvider';
-import JourNav from '@/components/JourNav';
+import JourNav, { JourPager } from '@/components/JourNav';
 import JourHeroImage from '@/components/JourHeroImage';
 import PhotoGalleryProvider from '@/components/PhotoGalleryProvider';
 import PhotoGallery from '@/components/PhotoGallery';
@@ -40,6 +37,24 @@ export default async function RecitPage({ params }: Props) {
 
   const { frontmatter, content } = recit;
   const topo = frontmatter.topoSlug ? getTopoBySlug(frontmatter.topoSlug) : null;
+  const jours = frontmatter.jours ?? [];
+
+  const body = (
+    <>
+      <JourHeroImage
+        images={jours.map(j => j.heroImage)}
+        fallback={frontmatter.heroImage}
+        style={{ marginBottom: '2rem' }}
+        priority
+      />
+      <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
+        <div className="topo-text">
+          <MDXRemote source={content} components={{ ...mdxComponents, blockquote: Citation }} />
+        </div>
+        <PhotoGallery />
+      </PhotoGalleryProvider>
+    </>
+  );
 
   return (
     <main className="content-main">
@@ -60,38 +75,17 @@ export default async function RecitPage({ params }: Props) {
           <hr />
         </div>
 
-        {frontmatter.jours?.length ? (
+        {jours.length ? (
           <JourProvider
-            titres={frontmatter.jours.map(j => j.titre)}
-            labels={frontmatter.jours.some(j => j.label) ? frontmatter.jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
+            titres={jours.map(j => j.titre)}
+            labels={jours.some(j => j.label) ? jours.map((j, i) => j.label ?? `J${i + 1}`) : undefined}
           >
             <JourNav />
-            <JourHeroImage
-              images={frontmatter.jours.map(j => j.heroImage)}
-              fallback={frontmatter.heroImage}
-              style={{ marginBottom: '2rem' }}
-            />
-            <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
-              <div className="topo-text">
-                <MDXRemote source={content} components={{ Photo, Gallery, Jour, PhotoLink }} />
-              </div>
-              <PhotoGallery />
-            </PhotoGalleryProvider>
+            {body}
+            <JourPager />
           </JourProvider>
         ) : (
-          <>
-            {frontmatter.heroImage && (
-              <div className="topo-photo" style={{ marginBottom: '2rem' }}>
-                <Image src={frontmatter.heroImage} alt="" fill style={{ objectFit: 'cover', borderRadius: '12px' }} />
-              </div>
-            )}
-            <PhotoGalleryProvider photos={frontmatter.photos ?? []}>
-              <div className="topo-text">
-                <MDXRemote source={content} components={{ Photo, Gallery, PhotoLink }} />
-              </div>
-              <PhotoGallery />
-            </PhotoGalleryProvider>
-          </>
+          body
         )}
 
       </article>

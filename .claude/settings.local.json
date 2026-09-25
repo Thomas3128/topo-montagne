@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(git rm *)",
+      "Bash(git mv *)",
+      "Bash(python -)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(TZ=Europe/Paris node -e \"for \\(const s of ['May 11 2026','Aug 24 2023','Jun 21 2026']\\) { const d=new Date\\(s\\); console.log\\(s.padEnd\\(12\\), '-> ancien:', d.getUTCDate\\(\\), '| nouveau:', d.getDate\\(\\)\\); }\")",
+      "PowerShell($wt = \"C:\\\\Users\\\\tds15\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-tds15-Documents-perso-topo-montagne\\\\d8a94c4e-a07b-4577-962a-69565d7bd239\\\\scratchpad\\\\head-wt\"; $j = Get-Item \"$wt\\\\node_modules\"; if \\($j.LinkType -eq 'Junction'\\) { $j.Delete\\(\\) }; Test-Path \"$wt\\\\node_modules\"; Test-Path \"C:\\\\Users\\\\tds15\\\\Documents\\\\perso\\\\topo-montagne\\\\node_modules\\\\next\"; git -C \"C:\\\\Users\\\\tds15\\\\Documents\\\\perso\\\\topo-montagne\" worktree remove --force $wt; git -C \"C:\\\\Users\\\\tds15\\\\Documents\\\\perso\\\\topo-montagne\" worktree list)"
     ]
   }
 }
